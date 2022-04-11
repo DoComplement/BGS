@@ -25,7 +25,7 @@ end
 
 -- teleports the user to the lab and repeatedly teleports the user to the NPC until the frame is loaded
 if (not checkFrame()) then
-    pcall(Event:FireServer("Teleport", "LabSpawn"))
+    Event:FireServer("Teleport", "LabSpawn")
     repeat wait(0.5)
         LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1740.89038, 2705.99048, 11044.1572, -0.984202802, -4.41739587e-08, -0.177044764, -3.80400742e-08, 1, -3.80401666e-08, 0.177044764, -3.07044417e-08, -0.984202802)
     until LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame", true)
@@ -90,7 +90,7 @@ end
 
 -- 'Important' parameters: "EventSpawn", "LabSpawn"
 local function TP(location)
-    pcall(Event:FireServer("Teleport", location))
+    Event:FireServer("Teleport", location)
 end
 
 -- checks if either the skip frame is visible, given the visibile attribute value of the parent Brewing frame
@@ -118,7 +118,7 @@ spawn(function()
                         for x, v in pairs(Folder:GetChildren()) do
                             if v.Transparency == 0  then -- checks for a ready potion
                                 print("Brewing", v.Name) -- outputs which potion is being brewed
-                                pcall(Event:FireServer("BrewPotion", getPotion(v.Name))) -- brews the potion
+                                Event:FireServer("BrewPotion", getPotion(v.Name)) -- brews the potion
                                 v.Transparency = 1 -- sets the corresponding brew tag
                                 break
                             end
@@ -131,7 +131,7 @@ spawn(function()
                                 break
                             end
                         end
-                        pcall(Event:FireServer("ClaimPotion", i))
+                        Event:FireServer("ClaimPotion", i)
                     end
                 end
             end
