@@ -1,26 +1,17 @@
 
 -- wait until your character is loaded in cuz im bad at coding
 
+local MS = game:GetService("MarketplaceService")
+local RS = game:GetService("ReplicatedStorage")
 local LP = game:GetService("Players").LocalPlayer
-local Event = game:GetService("ReplicatedStorage").NetworkRemoteEvent
+local Event = RS.NetworkRemoteEvent
+local Function = RS.NetworkRemoteFunction
+local g_
 
 -- Checks if the BrewingFrame is a child of the LocalPlayers' ScreenGui
 local function checkFrame()
     if LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame") then return true
     else return false end
-end
-
--- assigns the Visible attribute of all of the frames which cause the BrewingFrame to close when interacted with
-local function iFrames(b)
-    local d = LP.PlayerGui.ScreenGui
-    local s = {"Codes", "Index", "Boosts", "Prizes"}
-    
-    for i = 1, #s do d.StatsFrame:FindFirstChild(s[i]).Visible = b end
-    
-    d.StatsFrame.Coins.More.Visible = b
-    d.StatsFrame.Gems.More.Visible = b
-    d.MainButtons.Visible = b
-    d.Settings.Visible = b
 end
 
 -- teleports the user to the lab and repeatedly teleports the user to the NPC until the frame is loaded
@@ -29,16 +20,9 @@ if (not checkFrame()) then
     repeat wait(0.5)
         LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1740.89038, 2705.99048, 11044.1572, -0.984202802, -4.41739587e-08, -0.177044764, -3.80400742e-08, 1, -3.80401666e-08, 0.177044764, -3.07044417e-08, -0.984202802)
     until LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame", true)
+    
+    if LP.PlayerGui.ScreenGui.BrewingFrame.Brewing.Brew3.Gamepass.Visible then g_ = 2 else g_ = 3 end
 end
-
--- waits until BrewingFrame is loaded
-local Frame = LP.PlayerGui.ScreenGui:WaitForChild("BrewingFrame")
-local g_ = 3; if Frame.Brewing.Brew3.Gamepass.Visible then g_ = 2 end -- defines the possible brewing slots
-
-warn("\nProgram Succesfully Initiated\nThanks for using the script ig\n")
-Frame.Close:Remove() -- removes the close button so the BrewingFrame doesn't get accidentaly closed
-iFrames(false) -- closes all the other GUIS so the BrewingFrame doesn't get accidentaly closed
--- The BrewingFrame is closed when any other GUI is opened
 
 -- defines the loop constraint for the auto brewer
 if (not LP:FindFirstChild("LOOP_CONSTRAINT")) then
@@ -63,9 +47,42 @@ if (not LP:FindFirstChild("LOOP_CONSTRAINT")) then
     part.Parent = folder
 end
 
+-- assigns the Visible attribute of all of the frames which cause the BrewingFrame to close when interacted with
+local function iFrames(b)
+    local d = LP.PlayerGui.ScreenGui
+    local s = {"Codes", "Index", "Boosts", "Prizes"}
+    
+    for i = 1, #s do d.StatsFrame:FindFirstChild(s[i]).Visible = b end
+    
+    d.StatsFrame.Coins.More.Visible = b
+    d.StatsFrame.Gems.More.Visible = b
+    d.MainButtons.Visible = b
+    d.Settings.Visible = b
+end
+
 -- defining variables for convenience
 local Folder = LP.Potions
 local Constraint = LP.LOOP_CONSTRAINT:FindFirstChildOfClass("Part")
+local Frame = LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
+
+-- to be called in the case where someone buys the Extra Brew Slot mid-game
+-- check passive condition on user's roblox account before giving possibility for this to be called
+-- (Change check condition from if the gamepass frame is visible to a condition if the user has purchased the Dev. Product)
+local function checkVIP()
+    if checkFrame() then 
+        if (not Frame.Brewing.Brew3.Gamepass.Visible and g_ == 2) then 
+		local t = Instance.new("Part")
+		t.Name = "+1 Enchant"
+		t.Parent = Folder 
+	      g_ = 3
+        end
+    end
+end)
+
+warn("\nProgram Succesfully Initiated\nThanks for using the script ig\n")
+Frame.Close:Remove() -- removes the close button so the BrewingFrame doesn't get accidentaly closed
+iFrames(false) -- closes all the other GUIS so the BrewingFrame doesn't get accidentaly closed
+-- The BrewingFrame is closed when ANY other GUI is opened
 
 -- complements the visibility of the BrewingFrame
 local function cFrame()
@@ -108,6 +125,8 @@ local function getPotion(str)
     end
 end
 
+-- test with using a pcall for the main loop
+
 -- main loop
 spawn(function()
     while wait(1) do
@@ -138,5 +157,4 @@ spawn(function()
         end
     end
 end)  
-
 
