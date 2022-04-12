@@ -77,7 +77,7 @@ local function checkVIP()
 	      g_ = 3
         end
     end
-end)
+end
 
 warn("\nProgram Succesfully Initiated\nThanks for using the script ig\n")
 Frame.Close:Remove() -- removes the close button so the BrewingFrame doesn't get accidentaly closed
