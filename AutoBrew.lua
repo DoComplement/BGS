@@ -152,6 +152,7 @@ spawn(function()
                         end
                         Event:FireServer("ClaimPotion", i)
                     end
+		    wait(0.5)	 				
                 end
             end
         end
