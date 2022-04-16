@@ -47,7 +47,7 @@ local l_UIVis = true
 --Properties:
 
 MainUi_2.Name = "MainUi_2"
-MainUi_2.Parent = game.Players.LocalPlayer.CoreGui
+MainUi_2.Parent = game.CoreGui
 MainUi_2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
