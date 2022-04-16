@@ -1,0 +1,374 @@
+
+-- Instances:
+
+local MainUi_3 = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local UIGradient = Instance.new("UIGradient")
+local UICorner = Instance.new("UICorner")
+local Body = Instance.new("Frame")
+local UICorner_2 = Instance.new("UICorner")
+local UIGradient_2 = Instance.new("UIGradient")
+local Potions_B = Instance.new("Frame")
+local P_Image1 = Instance.new("ImageLabel")
+local UICorner_3 = Instance.new("UICorner")
+local P_Label1 = Instance.new("TextLabel")
+local UICorner_4 = Instance.new("UICorner")
+local P_Reset1 = Instance.new("ImageButton")
+local P_Reset2 = Instance.new("ImageButton")
+local P_Image2 = Instance.new("ImageLabel")
+local P_Label2 = Instance.new("TextLabel")
+local UICorner_5 = Instance.new("UICorner")
+local P_Label3 = Instance.new("TextLabel")
+local UICorner_6 = Instance.new("UICorner")
+local P_Image3 = Instance.new("ImageLabel")
+local P_Reset3 = Instance.new("ImageButton")
+local Event_TP = Instance.new("TextButton")
+local UICorner_7 = Instance.new("UICorner")
+local Inv_GameUi = Instance.new("TextButton")
+local UICorner_8 = Instance.new("UICorner")
+local Lab_TP = Instance.new("TextButton")
+local UICorner_9 = Instance.new("UICorner")
+local Inv_Ui = Instance.new("TextButton")
+local UICorner_10 = Instance.new("UICorner")
+local C_Indicator = Instance.new("ImageButton")
+local C_Label = Instance.new("TextLabel")
+local Potions_N = Instance.new("Frame")
+local UICorner_11 = Instance.new("UICorner")
+local Potions_C = Instance.new("ImageButton")
+local P_List = Instance.new("Frame")
+local UIGradient_3 = Instance.new("UIGradient")
+local P_Label = Instance.new("TextLabel")
+local Main_C = Instance.new("ImageButton")
+local Warning_Icon = Instance.new("ImageButton")
+local Warning_Label = Instance.new("TextLabel")
+
+local direct = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.BrewingFrame.Recipes
+--Properties:
+
+MainUi_3.Name = "MainUi_3"
+MainUi_3.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+MainUi_3.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = MainUi_3
+MainFrame.Active = true
+MainFrame.Draggable = true
+MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MainFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.509253561, 0, 0.207581222, 0)
+MainFrame.Selectable = true
+MainFrame.Size = UDim2.new(0, 255, 0, 63)
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(172, 32, 182)), ColorSequenceKeypoint.new(0.42, Color3.fromRGB(211, 124, 127)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(211, 225, 7))}
+UIGradient.Parent = MainFrame
+
+UICorner.CornerRadius = UDim.new(0, 5)
+UICorner.Parent = MainFrame
+
+Body.Name = "Body"
+Body.Parent = MainFrame
+Body.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Body.BorderSizePixel = 0
+Body.Position = UDim2.new(0, 0, 0.295437276, 0)
+Body.Size = UDim2.new(0, 255, 0, 189)
+
+UICorner_2.CornerRadius = UDim.new(0, 2)
+UICorner_2.Parent = Body
+
+UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(56, 56, 56)), ColorSequenceKeypoint.new(0.62, Color3.fromRGB(107, 107, 107)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(134, 134, 134))}
+UIGradient_2.Parent = Body
+
+Potions_B.Name = "Potions_B"
+Potions_B.Parent = Body
+Potions_B.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Potions_B.BackgroundTransparency = 0.500
+Potions_B.BorderSizePixel = 0
+Potions_B.Position = UDim2.new(0.0370370895, 0, 0.162235066, 0)
+Potions_B.Size = UDim2.new(0, 188, 0, 126)
+
+P_Image1.Name = "P_Image1"
+P_Image1.Parent = Potions_B
+P_Image1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+P_Image1.BackgroundTransparency = 1.000
+P_Image1.BorderSizePixel = 0
+P_Image1.Position = UDim2.new(0.00680850819, 0, 0.0710000023, 0)
+P_Image1.Size = UDim2.new(0, 34, 0, 34)
+P_Image1.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+P_Image1.ImageTransparency = 1.000
+
+UICorner_3.Parent = Potions_B
+
+P_Label1.Name = "P_Label1"
+P_Label1.Parent = Potions_B
+P_Label1.BackgroundColor3 = Color3.fromRGB(236, 87, 77)
+P_Label1.Position = UDim2.new(0.200000003, 0, 0.0900000036, 0)
+P_Label1.Size = UDim2.new(0, 123, 0, 29)
+P_Label1.Font = Enum.Font.SourceSans
+P_Label1.Text = "Empty Potion Slot"
+P_Label1.TextColor3 = Color3.fromRGB(0, 0, 0)
+P_Label1.TextSize = 14.000
+
+UICorner_4.Parent = P_Label1
+
+P_Reset1.Name = "P_Reset1"
+P_Reset1.Parent = Potions_B
+P_Reset1.BackgroundTransparency = 1.000
+P_Reset1.Position = UDim2.new(0.860000014, 0, 0.100000001, 0)
+P_Reset1.Size = UDim2.new(0, 25, 0, 25)
+P_Reset1.ZIndex = 2
+P_Reset1.Image = "rbxassetid://6764432408"
+P_Reset1.ImageRectOffset = Vector2.new(200, 600)
+P_Reset1.ImageRectSize = Vector2.new(50, 50)
+
+P_Reset2.Name = "P_Reset2"
+P_Reset2.Parent = Potions_B
+P_Reset2.BackgroundTransparency = 1.000
+P_Reset2.Position = UDim2.new(0.860000014, 0, 0.3936508, 0)
+P_Reset2.Size = UDim2.new(0, 25, 0, 25)
+P_Reset2.ZIndex = 2
+P_Reset2.Image = "rbxassetid://6764432408"
+P_Reset2.ImageRectOffset = Vector2.new(200, 600)
+P_Reset2.ImageRectSize = Vector2.new(50, 50)
+
+P_Image2.Name = "P_Image2"
+P_Image2.Parent = Potions_B
+P_Image2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+P_Image2.BackgroundTransparency = 1.000
+P_Image2.BorderSizePixel = 0
+P_Image2.Position = UDim2.new(0.00680850819, 0, 0.364650816, 0)
+P_Image2.Size = UDim2.new(0, 34, 0, 34)
+P_Image2.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+P_Image2.ImageTransparency = 1.000
+
+P_Label2.Name = "P_Label2"
+P_Label2.Parent = Potions_B
+P_Label2.BackgroundColor3 = Color3.fromRGB(236, 87, 77)
+P_Label2.Position = UDim2.new(0.200000003, 0, 0.38365081, 0)
+P_Label2.Size = UDim2.new(0, 123, 0, 29)
+P_Label2.Font = Enum.Font.SourceSans
+P_Label2.Text = "Empty Potion Slot"
+P_Label2.TextColor3 = Color3.fromRGB(0, 0, 0)
+P_Label2.TextSize = 14.000
+
+UICorner_5.Parent = P_Label2
+
+P_Label3.Name = "P_Label3"
+P_Label3.Parent = Potions_B
+P_Label3.BackgroundColor3 = Color3.fromRGB(236, 87, 77)
+P_Label3.Position = UDim2.new(0.200000003, 0, 0.677999973, 0)
+P_Label3.Size = UDim2.new(0, 123, 0, 29)
+P_Label3.Font = Enum.Font.SourceSans
+P_Label3.Text = "Empty Potion Slot"
+P_Label3.TextColor3 = Color3.fromRGB(0, 0, 0)
+P_Label3.TextSize = 14.000
+
+UICorner_6.Parent = P_Label3
+
+P_Image3.Name = "P_Image3"
+P_Image3.Parent = Potions_B
+P_Image3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+P_Image3.BackgroundTransparency = 1.000
+P_Image3.BorderSizePixel = 0
+P_Image3.Position = UDim2.new(0.00700000022, 0, 0.658999979, 0)
+P_Image3.Size = UDim2.new(0, 34, 0, 34)
+P_Image3.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+P_Image3.ImageTransparency = 1.000
+
+P_Reset3.Name = "P_Reset3"
+P_Reset3.Parent = Potions_B
+P_Reset3.BackgroundTransparency = 1.000
+P_Reset3.Position = UDim2.new(0.860000014, 0, 0.688000023, 0)
+P_Reset3.Size = UDim2.new(0, 25, 0, 25)
+P_Reset3.ZIndex = 2
+P_Reset3.Image = "rbxassetid://6764432408"
+P_Reset3.ImageRectOffset = Vector2.new(200, 600)
+P_Reset3.ImageRectSize = Vector2.new(50, 50)
+
+Event_TP.Name = "Event_TP"
+Event_TP.Parent = Body
+Event_TP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Event_TP.BackgroundTransparency = 0.660
+Event_TP.BorderSizePixel = 0
+Event_TP.Position = UDim2.new(0.805999994, 0, 0.170000002, 0)
+Event_TP.Size = UDim2.new(0, 40, 0, 26)
+Event_TP.Font = Enum.Font.SourceSans
+Event_TP.Text = "Event"
+Event_TP.TextColor3 = Color3.fromRGB(255, 255, 255)
+Event_TP.TextSize = 14.000
+
+UICorner_7.CornerRadius = UDim.new(0, 4)
+UICorner_7.Parent = Event_TP
+
+Inv_GameUi.Name = "Inv_GameUi"
+Inv_GameUi.Parent = Body
+Inv_GameUi.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Inv_GameUi.BackgroundTransparency = 0.660
+Inv_GameUi.BorderSizePixel = 0
+Inv_GameUi.Position = UDim2.new(0.808000028, 0, 0.50999999, 0)
+Inv_GameUi.Size = UDim2.new(0, 40, 0, 26)
+Inv_GameUi.Font = Enum.Font.SourceSans
+Inv_GameUi.Text = "Inv"
+Inv_GameUi.TextColor3 = Color3.fromRGB(255, 255, 255)
+Inv_GameUi.TextSize = 14.000
+
+UICorner_8.CornerRadius = UDim.new(0, 4)
+UICorner_8.Parent = Inv_GameUi
+
+Lab_TP.Name = "Lab_TP"
+Lab_TP.Parent = Body
+Lab_TP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Lab_TP.BackgroundTransparency = 0.660
+Lab_TP.BorderSizePixel = 0
+Lab_TP.Position = UDim2.new(0.808000028, 0, 0.340000004, 0)
+Lab_TP.Size = UDim2.new(0, 40, 0, 26)
+Lab_TP.Font = Enum.Font.SourceSans
+Lab_TP.Text = "Lab"
+Lab_TP.TextColor3 = Color3.fromRGB(255, 255, 255)
+Lab_TP.TextSize = 14.000
+
+UICorner_9.CornerRadius = UDim.new(0, 4)
+UICorner_9.Parent = Lab_TP
+
+Inv_Ui.Name = "Inv_Ui"
+Inv_Ui.Parent = Body
+Inv_Ui.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Inv_Ui.BackgroundTransparency = 0.660
+Inv_Ui.BorderSizePixel = 0
+Inv_Ui.Position = UDim2.new(0.807746291, 0, 0.68690443, 0)
+Inv_Ui.Size = UDim2.new(0, 40, 0, 26)
+Inv_Ui.Font = Enum.Font.SourceSans
+Inv_Ui.Text = "UI"
+Inv_Ui.TextColor3 = Color3.fromRGB(255, 255, 255)
+Inv_Ui.TextSize = 14.000
+
+UICorner_10.CornerRadius = UDim.new(0, 4)
+UICorner_10.Parent = Inv_Ui
+
+C_Indicator.Name = "C_Indicator"
+C_Indicator.Parent = Body
+C_Indicator.BackgroundTransparency = 1.000
+C_Indicator.Position = UDim2.new(0.0329999998, 0, 0.0149999997, 0)
+C_Indicator.Size = UDim2.new(0, 24, 0, 24)
+C_Indicator.ZIndex = 2
+C_Indicator.Image = "rbxassetid://3926307971"
+C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0)
+C_Indicator.ImageRectOffset = Vector2.new(644, 44)
+C_Indicator.ImageRectSize = Vector2.new(36, 36)
+C_Indicator.ImageTransparency = 0.200
+
+C_Label.Name = "C_Label"
+C_Label.Parent = Body
+C_Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+C_Label.BackgroundTransparency = 1.000
+C_Label.Position = UDim2.new(0.149019614, 0, 0.0211640205, 0)
+C_Label.Size = UDim2.new(0, 76, 0, 21)
+C_Label.Font = Enum.Font.SourceSans
+C_Label.Text = "Currently: Idle"
+C_Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+C_Label.TextSize = 14.000
+C_Label.TextXAlignment = Enum.TextXAlignment.Left
+
+Potions_N.Name = "Potions_N"
+Potions_N.Parent = Body
+Potions_N.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Potions_N.BackgroundTransparency = 0.600
+Potions_N.Position = UDim2.new(0.0352941193, 0, 0.862433851, 0)
+Potions_N.Size = UDim2.new(0, 188, 0, 19)
+
+UICorner_11.CornerRadius = UDim.new(0, 3)
+UICorner_11.Parent = Potions_N
+
+Potions_C.Name = "Potions_C"
+Potions_C.Parent = Potions_N
+Potions_C.BackgroundTransparency = 1.000
+Potions_C.Position = UDim2.new(0.879999995, 0, -0.270000011, 0)
+Potions_C.Rotation = 90.000
+Potions_C.Selectable = false
+Potions_C.Size = UDim2.new(0, 25, 0, 28)
+Potions_C.ZIndex = 2
+Potions_C.Image = "rbxassetid://3926305904"
+Potions_C.ImageRectOffset = Vector2.new(564, 284)
+Potions_C.ImageRectSize = Vector2.new(36, 36)
+
+P_List.Name = "P_List"
+P_List.Parent = Potions_N
+P_List.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
+P_List.BackgroundTransparency = 0.020
+P_List.BorderSizePixel = 0
+P_List.Position = UDim2.new(0.00200000009, 0, 0.970000029, 0)
+P_List.Size = UDim2.new(0, 188, 0, 23 + 19*#direct:GetChildren())
+
+UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.83, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
+UIGradient_3.Parent = Potions_N
+
+P_Label.Name = "P_Label"
+P_Label.Parent = Body
+P_Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+P_Label.BackgroundTransparency = 1.000
+P_Label.Position = UDim2.new(0.175999999, 0, 0.870000005, 0)
+P_Label.Size = UDim2.new(0, 63, 0, 15)
+P_Label.Font = Enum.Font.SourceSans
+P_Label.Text = "Choose Potion(s)"
+P_Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+P_Label.TextSize = 14.000
+P_Label.TextStrokeTransparency = 0.750
+P_Label.TextXAlignment = Enum.TextXAlignment.Left
+
+Main_C.Name = "Main_C"
+Main_C.Parent = MainFrame
+Main_C.BackgroundTransparency = 1.000
+Main_C.Position = UDim2.new(0.889999986, 0, -0.075000003, 0)
+Main_C.Selectable = false
+Main_C.Size = UDim2.new(0, 25, 0, 28)
+Main_C.ZIndex = 2
+Main_C.Image = "rbxassetid://3926305904"
+Main_C.ImageColor3 = Color3.fromRGB(0, 0, 0)
+Main_C.ImageRectOffset = Vector2.new(564, 284)
+Main_C.ImageRectSize = Vector2.new(36, 36)
+
+Warning_Icon.Name = "Warning_Icon"
+Warning_Icon.Parent = MainFrame
+Warning_Icon.BackgroundColor3 = Color3.fromRGB(165, 0, 0)
+Warning_Icon.BackgroundTransparency = 1.000
+Warning_Icon.BorderSizePixel = 0
+Warning_Icon.Position = UDim2.new(0.0350000001, 0, -0.400000006, 0)
+Warning_Icon.Size = UDim2.new(0, 25, 0, 25)
+Warning_Icon.ZIndex = 2
+Warning_Icon.Image = "rbxassetid://3926305904"
+Warning_Icon.ImageColor3 = Color3.fromRGB(255, 0, 0)
+Warning_Icon.ImageRectOffset = Vector2.new(364, 324)
+Warning_Icon.ImageRectSize = Vector2.new(36, 36)
+
+Warning_Label.Name = "Warning_Label"
+Warning_Label.Parent = MainFrame
+Warning_Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Warning_Label.BackgroundTransparency = 1.000
+Warning_Label.Position = UDim2.new(0.101960786, 0, -0.301587313, 0)
+Warning_Label.Size = UDim2.new(0, 200, 0, 18)
+Warning_Label.Font = Enum.Font.SourceSans
+Warning_Label.Text = "Warning! BrewingFrame Unloaded!"
+Warning_Label.TextColor3 = Color3.fromRGB(0, 0, 0)
+Warning_Label.TextSize = 14.000
+
+for i = 1, #direct:GetChildren() - 1 do
+	local temp = direct:FindFirstChild("Recipe"..i)
+
+	local Temp = Instance.new("TextButton")
+	local t_UIC = Instance.new("UICorner")
+
+	Temp.Name = temp.Name
+	Temp.Parent = P_List
+	Temp.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
+	Temp.BackgroundTransparency = 0.250
+	Temp.Position = UDim2.new(0.101063833, 0, 0.035 + 0.105*(i - 1), 0)
+	Temp.Size = UDim2.new(0, 149, 0, 19)
+	Temp.Font = Enum.Font.SourceSans
+	Temp.Text = temp.ItemName.Text
+	Temp.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Temp.TextSize = 14.000
+	Temp.TextStrokeTransparency = 0.750
+
+	t_UIC.CornerRadius = UDim.new(0, 8)
+	t_UIC.Parent = Temp
+end
