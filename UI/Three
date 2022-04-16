@@ -361,7 +361,7 @@ Warning_Label.Font = Enum.Font.SourceSans
 Warning_Label.Text = "Warning! BrewingFrame Unloaded!"
 Warning_Label.TextColor3 = Color3.fromRGB(0, 0, 0)
 Warning_Label.TextSize = 14.000
-Warning_Label.TextStrokeTransparency = 1
+Warning_Label.TextTransparency = 1
 
 pcall(function()
     for i = 1, #direct:GetChildren() - 1 do
