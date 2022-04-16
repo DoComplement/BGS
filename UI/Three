@@ -47,7 +47,7 @@ local g_Constraint = false
 --Properties:
 
 MainUi_3.Name = "MainUi_3"
-MainUi_3.Parent = game.Players.LocalPlayer.CoreGui
+MainUi_3.Parent = game.CoreGui
 MainUi_3.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -57,7 +57,7 @@ MainFrame.Draggable = true
 MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 MainFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
 MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(0.509253561, 0, 0.207581222, 0)
+MainFrame.Position = UDim2.new(0, 0, 0, 0)
 MainFrame.Selectable = true
 MainFrame.Size = UDim2.new(0, 255, 0, 63)
 
