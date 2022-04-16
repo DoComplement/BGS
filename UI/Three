@@ -197,6 +197,10 @@ Event_TP.Font = Enum.Font.SourceSans
 Event_TP.Text = "Event"
 Event_TP.TextColor3 = Color3.fromRGB(255, 255, 255)
 Event_TP.TextSize = 14.000
+Event_TP.MouseButton1Down:Connect(function()
+    -- check if the user is at the event spawn 
+    game:GetService("ReplicatedStorage").NetworkRemoteEvent:FireServer("Teleport", "EventSpawn")
+end)
 
 UICorner_7.CornerRadius = UDim.new(0, 4)
 UICorner_7.Parent = Event_TP
@@ -227,6 +231,10 @@ Lab_TP.Font = Enum.Font.SourceSans
 Lab_TP.Text = "Lab"
 Lab_TP.TextColor3 = Color3.fromRGB(255, 255, 255)
 Lab_TP.TextSize = 14.000
+Lab_TP.MouseButton1Down:Connect(function()
+    -- check if the user is already there
+    game:GetService("ReplicatedStorage").NetworkRemoteEvent:FireServer("Teleport", "LabSpawn")
+end)
 
 UICorner_9.CornerRadius = UDim.new(0, 4)
 UICorner_9.Parent = Lab_TP
