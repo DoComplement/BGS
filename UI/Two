@@ -41,10 +41,13 @@ local Warning_Icon = Instance.new("ImageButton")
 local Warning_Label = Instance.new("TextLabel")
 
 local direct = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.BrewingFrame.Recipes
+local g_Constraint = false
+local g_UIVis = false
+local l_UIVis = true
 --Properties:
 
 MainUi_2.Name = "MainUi_2"
-MainUi_2.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+MainUi_2.Parent = game.Players.LocalPlayer.CoreGui
 MainUi_2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -161,6 +164,10 @@ Event_TP.Font = Enum.Font.SourceSans
 Event_TP.Text = "Event"
 Event_TP.TextColor3 = Color3.fromRGB(255, 255, 255)
 Event_TP.TextSize = 14.000
+Event_TP.MouseButton1Down:Connect(function()
+    -- write condition to check if user is already at event aready, (then don't teleport)
+    game:GetService("ReplicatedStorage").NetworkRemoteEvent:FireServer("Teleportation", "EventSpawn")
+end)
 
 UICorner_6.CornerRadius = UDim.new(0, 4)
 UICorner_6.Parent = Event_TP
@@ -295,7 +302,7 @@ Main_C.ImageRectSize = Vector2.new(36, 36)
 Warning_Icon.Name = "Warning_Icon"
 Warning_Icon.Parent = MainFrame
 Warning_Icon.BackgroundColor3 = Color3.fromRGB(165, 0, 0)
-Warning_Icon.BackgroundTransparency = 1.000
+Warning_Icon.BackgroundTransparency = 1
 Warning_Icon.BorderSizePixel = 0
 Warning_Icon.Position = UDim2.new(0.0350000001, 0, -0.400000006, 0)
 Warning_Icon.Size = UDim2.new(0, 25, 0, 25)
@@ -304,17 +311,19 @@ Warning_Icon.Image = "rbxassetid://3926305904"
 Warning_Icon.ImageColor3 = Color3.fromRGB(255, 0, 0)
 Warning_Icon.ImageRectOffset = Vector2.new(364, 324)
 Warning_Icon.ImageRectSize = Vector2.new(36, 36)
+Warning_Icon.ImageTransparency = 1
 
 Warning_Label.Name = "Warning_Label"
 Warning_Label.Parent = MainFrame
 Warning_Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Warning_Label.BackgroundTransparency = 1.000
+Warning_Label.BackgroundTransparency = 1
 Warning_Label.Position = UDim2.new(0.101960786, 0, -0.301587313, 0)
 Warning_Label.Size = UDim2.new(0, 200, 0, 18)
 Warning_Label.Font = Enum.Font.SourceSans
 Warning_Label.Text = "Warning! BrewingFrame Unloaded!"
 Warning_Label.TextColor3 = Color3.fromRGB(0, 0, 0)
 Warning_Label.TextSize = 14.000
+Warning_Label.TextStrokeTransparency = 1
 
 pcall(function()
     for i = 1, #direct:GetChildren() - 1 do
