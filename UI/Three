@@ -351,24 +351,26 @@ Warning_Label.Text = "Warning! BrewingFrame Unloaded!"
 Warning_Label.TextColor3 = Color3.fromRGB(0, 0, 0)
 Warning_Label.TextSize = 14.000
 
-for i = 1, #direct:GetChildren() - 1 do
-	local temp = direct:FindFirstChild("Recipe"..i)
-
-	local Temp = Instance.new("TextButton")
-	local t_UIC = Instance.new("UICorner")
-
-	Temp.Name = temp.Name
-	Temp.Parent = P_List
-	Temp.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
-	Temp.BackgroundTransparency = 0.250
-	Temp.Position = UDim2.new(0.101063833, 0, 0.035 + 0.105*(i - 1), 0)
-	Temp.Size = UDim2.new(0, 149, 0, 19)
-	Temp.Font = Enum.Font.SourceSans
-	Temp.Text = temp.ItemName.Text
-	Temp.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Temp.TextSize = 14.000
-	Temp.TextStrokeTransparency = 0.750
-
-	t_UIC.CornerRadius = UDim.new(0, 8)
-	t_UIC.Parent = Temp
-end
+pcall(function()
+    for i = 1, #direct:GetChildren() - 1 do
+    	local temp = direct:FindFirstChild("Recipe"..i)
+    
+    	local Temp = Instance.new("TextButton")
+    	local t_UIC = Instance.new("UICorner")
+    
+    	Temp.Name = temp.Name
+    	Temp.Parent = P_List
+    	Temp.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
+    	Temp.BackgroundTransparency = 0.250
+    	Temp.Position = UDim2.new(0.101063833, 0, 0.035 + 0.105*(i - 1), 0)
+    	Temp.Size = UDim2.new(0, 149, 0, 19)
+    	Temp.Font = Enum.Font.SourceSans
+    	Temp.Text = temp.ItemName.Text
+    	Temp.TextColor3 = Color3.fromRGB(255, 255, 255)
+    	Temp.TextSize = 14.000
+    	Temp.TextStrokeTransparency = 0.750
+    
+    	t_UIC.CornerRadius = UDim.new(0, 8)
+    	t_UIC.Parent = Temp
+    end
+end)
