@@ -271,6 +271,7 @@ P_List.BackgroundTransparency = 0.020
 P_List.BorderSizePixel = 0
 P_List.Position = UDim2.new(0.00200000009, 0, 0.970000029, 0)
 P_List.Size = UDim2.new(0, 188, 0, 23 + 19*#direct:GetChildren())
+P_List.Visible = false
 
 UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.83, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
 UIGradient_3.Parent = Potions_N
@@ -324,7 +325,7 @@ Warning_Label.Font = Enum.Font.SourceSans
 Warning_Label.Text = "Warning! BrewingFrame Unloaded!"
 Warning_Label.TextColor3 = Color3.fromRGB(0, 0, 0)
 Warning_Label.TextSize = 14.000
-Warning_Label.TextStrokeTransparency = 1
+Warning_Label.TextTransparency = 1
 
 pcall(function()
     for i = 1, #direct:GetChildren() - 1 do
