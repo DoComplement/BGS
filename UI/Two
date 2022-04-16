@@ -56,7 +56,7 @@ MainFrame.Active = true
 MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 MainFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
 MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(0.290252924, 0, 0.172683507, 0)
+MainFrame.Position = UDim2.new(0, 0, 0, 0)
 MainFrame.Selectable = true
 MainFrame.Size = UDim2.new(0, 255, 0, 63)
 
