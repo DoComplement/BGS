@@ -10,17 +10,16 @@ local g_
 local p_Q = {}
 local sum = 0
 
-if not LP:FindFirstChild("leaderstats") then repeat wait(2) until LP:FindFirstChild("leaderstats") end
-wait(4)
+if not LP:FindFirstChild("leaderstats") then repeat wait(1) until LP:FindFirstChild("leaderstats") end
+wait(3) -- yolo
+LP.Character:FindFirstChild("HumanoidRootPart").Anchored = true
 
 -- teleports the user to the lab and repeatedly teleports the user to the NPC until the frame is loaded
 pcall(function()
     if (not LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")) then
-        Event:FireServer("Teleport", "LabSpawn")
-        repeat wait(0.5)
-            LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1740.89038, 2705.99048, 11044.1572, -0.984202802, -4.41739587e-08, -0.177044764, -3.80400742e-08, 1, -3.80401666e-08, 0.177044764, -3.07044417e-08, -0.984202802)
-        until LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
-    end
+        Event:FireServer("Teleport", "LabSpawn"); wait(0.5)
+        LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1740.89038, 2705.99048, 11044.1572, -0.984202802, -4.41739587e-08, -0.177044764, -3.80400742e-08, 1, -3.80401666e-08, 0.177044764, -3.07044417e-08, -0.984202802)
+    end 
     
     Frame = LP.PlayerGui.ScreenGui:WaitForChild("BrewingFrame")
     if Frame.Brewing.Brew3.Gamepass.Visible then 
@@ -53,7 +52,8 @@ local function getPotion(str)
     end
 end
 
-Event:FireServer("Teleport", "LabLeaveSpawn")
+Event:FireServer("Teleport", "LabLeaveSpawn"); wait(0.5)
+LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1697.16882, 1855.47021, 11037.1455, 1, 0, -1.93564623e-10, 0, 1, 0, 1.93564623e-10, 0, 1)
 wait(2)
 -- sequence of forced steps to get the user to open their PetsFrame to initialize the amount of potions the user has
 pcall(function()
@@ -123,11 +123,11 @@ pcall(function()
         if v:IsA("ImageButton") then v.Visible = true end
     end
     
-    Event:FireServer("Teleport", "LabSpawn")
-    repeat wait(0.5)
-        LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1740.89038, 2705.99048, 11044.1572, -0.984202802, -4.41739587e-08, -0.177044764, -3.80400742e-08, 1, -3.80401666e-08, 0.177044764, -3.07044417e-08, -0.984202802)
-    until LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
+    Event:FireServer("Teleport", "LabSpawn"); wait(0.5)
+    LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1740.89038, 2705.99048, 11044.1572, -0.984202802, -4.41739587e-08, -0.177044764, -3.80400742e-08, 1, -3.80401666e-08, 0.177044764, -3.07044417e-08, -0.984202802)
+    LP.PlayerGui.ScreenGui:WaitForChild("BrewingFrame")
     Event:FireServer("Teleport", "LabLeaveSpawn")
+    LP.Character["HumanoidRootPart"].Anchored = false
 end)
 
 print("Total quantity of potions: " .. sum)
@@ -155,7 +155,7 @@ spawn(function()
     while wait(1) do
         pcall(function()
             if (UI.MainFrame.Body.C_Indicator.ImageColor3 == Color3.fromRGB(0, 255, 0) and Frame) then
-                for i = 1, g_ do
+                for i = g_, 1, -1 do
                     if (not checkSkip(i)) then
                         if Frame.Brewing["Brew"..i].Empty.Visible then
                             for x = 1, g_ do
