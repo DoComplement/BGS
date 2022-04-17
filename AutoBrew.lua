@@ -171,11 +171,11 @@ spawn(function()
                             for x = 1, g_ do 
                                 if Frame.Brewing["Brew"..i].Brewing.ItemName.Text == UI.MainFrame.Body.Potions_B["P_Label"..x].Text and not UI.MainFrame.Body.Potions_B["P_Bool"..x].Value then -- checks collected potion is still being brewed
                                     UI.MainFrame.Body.Potions_B["P_Bool"..x].Value = true
-                                    Event:FireServer("ClaimPotion", i)
                                     p_Q[getPotion(UI.MainFrame.Body.Potions_B["P_Label"..x].Text)] = p_Q[getPotion(UI.MainFrame.Body.Potions_B["P_Label"..x].Text)] + 1; sum = sum + 1
                                     break
                                 end
                             end
+                            Event:FireServer("ClaimPotion", i)
                         end
                         wait(0.5)
                     end
