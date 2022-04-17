@@ -560,8 +560,7 @@ pcall(function()
 
 		local Temp = Instance.new("TextButton")
 		local TextLabel = Instance.new("TextLabel")
-		local t1_UIC = Instance.new("UICorner")
-		local t2_UIC = Instance.new("UICorner")
+		local t_UIC = Instance.new("UICorner")
 
 		Temp.Name = temp.Name
 		Temp.Parent = P_List
@@ -590,11 +589,8 @@ pcall(function()
 		table.insert(images, tostring(temp.ItemImage.Image))
 		table.insert(g_P, temp.ItemName.Text)
 
-		t1_UIC.CornerRadius = UDim.new(0, 8)
-		t1_UIC.Parent = Temp
-		
-		t2_UIC.CornerRadius = UDim.new(0, 8)
-		t2_UIC.Parent = Temp
+		t_UIC.CornerRadius = UDim.new(0, 8)
+		t_UIC.Parent = Temp
 	end
 end)
 
