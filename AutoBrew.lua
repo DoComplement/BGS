@@ -130,21 +130,24 @@ pcall(function()
     Event:FireServer("Teleport", "LabLeaveSpawn")
 end)
 
-for i = 1, #p_Q do print("Quantity of " .. Potions["Recipe"..i].Text .. " = " .. p_Q[i]) end
+print("Total quantity of potions: " .. sum)
+for i = 1, #p_Q do print(Potions["Recipe"..i].Text .. ": " .. p_Q[i] .. " potions in storage") end
 
 -- checks if the user is capable of brewing some potion
 local function checkBrew(str)
     local index = getPotion(str)
+    local b
     pcall(function()
-        if index < 3 then if LP.PlayerGui.leaderstats.Gems.Value >= 10000000 then q_P[index] = q_P[index] - 1; sum = sum - 1; return true else return false end
-        elseif index == 3 then if LP.PlayerGui.leaderstats.Gems.Value >= 15000000 then q_P[3] = q_P[3] - 1; sum = sum - 1; return true else return false end
-        elseif index == 4 then if q_P[1] > 2 then q_P[1] = q_P[1] - 3; sum = sum - 3; return true end
-        elseif index == 5 then if q_P[2] > 2 then q_P[2] = q_P[2] - 3; sum = sum - 3; return true end
-        elseif index == 6 then if q_P[3] > 4 then q_P[3] = q_P[3] - 5; sum = sum - 5; return true end
-        elseif index == 7 then if q_P[6] > 0 and q_P[4] > 4 then q_P[6] = q_P[6] - 1; q_P[4] = q_P[4] - 5; sum = sum - 6; return true else return false end
-        elseif index == 8 then if q_P[6] > 0 and q_P[5] > 4 then q_P[6] = q_P[6] - 1; q_P[5] = q_P[5] - 5; sum = sum - 6; return true else return false end
-        else if q_P[6] > 2 and LP.PlayerGui.leaderstats.Gems.Value >= 250000000 then q_P[6] = q_P[6] - 3; sum = sum - 3; return true else return false end end
+        if index < 3 then b = LP.PlayerGui.leaderstats.Gems.Value >= 10000000; if b then p_Q[index] = p_Q[index] - 1; sum = sum - 1 end
+        elseif index == 3 then b = LP.PlayerGui.leaderstats.Gems.Value >= 15000000; if b then p_Q[3] = p_Q[3] - 1; sum = sum - 1 end
+        elseif index == 4 then b = p_Q[1] > 2; if b then p_Q[1] = p_Q[1] - 3; sum = sum - 3 end
+        elseif index == 5 then b = p_Q[2] > 2; if b then p_Q[2] = p_Q[2] - 3; sum = sum - 3 end
+        elseif index == 6 then b = p_Q[3] > 4; if b then p_Q[3] = p_Q[3] - 5; sum = sum - 5 end
+        elseif index == 7 then b = (p_Q[6] > 0 and p_Q[4] > 4); if b then p_Q[6] = p_Q[6] - 1; p_Q[4] = p_Q[4] - 5; sum = sum - 6 end
+        elseif index == 8 then b = (p_Q[6] > 0 and p_Q[5] > 4); if b then p_Q[6] = p_Q[6] - 1; p_Q[5] = p_Q[5] - 5; sum = sum - 6 end
+        else b = (p_Q[6] > 2 and LP.PlayerGui.leaderstats.Gems.Value >= 250000000); if b then p_Q[6] = p_Q[6] - 3; sum = sum - 3 end end
     end)
+    return b
 end
 
 -- main loop
@@ -161,7 +164,7 @@ spawn(function()
                                         Event:FireServer("BrewPotion", getPotion(UI.MainFrame.Body.Potions_B["P_Label"..x].Text)) -- brews the potion
                                         UI.MainFrame.Body.Potions_B["P_Bool"..x].Value = false
                                         break
-                                    else print("Not enough resources to brew " .. UI.MainFrame.Body.Potions_B["P_Label"..x].Text) end
+                                    else print("Not enough resources to brew " .. UI.MainFrame.Body.Potions_B["P_Label"..x].Text) end    
                                 end
                             end
                         else
@@ -169,7 +172,7 @@ spawn(function()
                                 if Frame.Brewing["Brew"..i].Brewing.ItemName.Text == UI.MainFrame.Body.Potions_B["P_Label"..x].Text and not UI.MainFrame.Body.Potions_B["P_Bool"..x].Value then -- checks collected potion is still being brewed
                                     UI.MainFrame.Body.Potions_B["P_Bool"..x].Value = true
                                     Event:FireServer("ClaimPotion", i)
-                                    p_Q[getPotion(UI.MainFrame.Body.Potions_B["P_Label"..x].Text)] = q_P[getPotion(UI.MainFrame.Body.Potions_B["P_Label"..x].Text)] + 1; sum = sum + 1
+                                    p_Q[getPotion(UI.MainFrame.Body.Potions_B["P_Label"..x].Text)] = p_Q[getPotion(UI.MainFrame.Body.Potions_B["P_Label"..x].Text)] + 1; sum = sum + 1
                                     break
                                 end
                             end
@@ -182,7 +185,6 @@ spawn(function()
     end
 end)
 
-warn("Program fully loaded!\n\nIf you encounter any bugs/problems, ")
-warn("PM me either by discord - dooop#0496 - or through V3rmillion.net - Activities12 -")
-warn("detailing the problem. Thanks again for using the script!")
+warn("Program fully loaded! If you encounter any bugs/problems, or, if you have any questions/suggestions, ")
+warn("please PM me either by discord - dooop#0496 - or through V3rmillion.net - Activities12 -")
 
