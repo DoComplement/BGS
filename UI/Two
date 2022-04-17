@@ -49,10 +49,12 @@ local BFrame = LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
 local g_Constraint = false
 local g_UIVis = true
 local images = {}
+local P_list = {"Empty Potion Slot", "Empty Potion Slot"}
+local g_P = {}
 --Properties:
 
 MainUi_2.Name = name
-MainUi_2.Parent = game.CoreGui
+MainUi_2.Parent = game:GetService("CoreGui")
 MainUi_2.ZIndexBehavior = Enum.ZIndexBehavior.Global
 
 MainFrame.Name = "MainFrame"
@@ -65,6 +67,7 @@ MainFrame.BorderSizePixel = 0
 MainFrame.Position = UDim2.new(0, 0, 0, 0)
 MainFrame.Selectable = true
 MainFrame.Size = UDim2.new(0, 255, 0, 24)
+MainFrame.Visible = true
 
 UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(172, 32, 182)), ColorSequenceKeypoint.new(0.42, Color3.fromRGB(211, 124, 127)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(211, 225, 7))}
 UIGradient.Parent = MainFrame
@@ -156,17 +159,19 @@ P_Reset1.MouseButton1Down:Connect(function()
 		P_Image1.Image = P_Image2.Image
 		P_Image1.ImageTransparency = P_Image2.ImageTransparency
 		P_Reset1.ImageTransparency = P_Reset2.ImageTransparency
-		P_Bool1 = P_Bool2
+		P_Bool1.Value = P_Bool2.Value
+		P_list[1] = P_Label1.Text
 		if P_Label2.Text ~= "Empty Potion Slot" then
 		    P_Label2.Text = "Empty Potion Slot"
 		    P_Image2.ImageTransparency = 1
 		    P_Reset2.ImageTransparency = 0.5
-		    P_Bool2 = false
+		    P_Bool2.Value = false
+		    P_list[2] = P_Label2.Text
 		end
         if g_Constraint and P_Label1.Text == "Empty Potion Slot" then
-				g_Constraint = false
-				C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0)
-				C_Label.Text = "Currently:  Idle"
+			g_Constraint = false
+			C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0)
+			C_Label.Text = "Currently:  Idle"
 		end
 	end
 end)
@@ -186,7 +191,8 @@ P_Reset2.MouseButton1Down:Connect(function()
 		P_Label2.Text = "Empty Potion Slot"
 		P_Reset2.ImageTransparency = 0.5
 		P_Image2.ImageTransparency = 1
-		P_Bool2 = false
+		P_Bool2.Value = false
+		P_list[2] = P_Label2.Text
 	end
 end)
 
@@ -340,19 +346,6 @@ Potions_N.Size = UDim2.new(0, 188, 0, 19)
 UICorner_10.CornerRadius = UDim.new(0, 3)
 UICorner_10.Parent = Potions_N
 
-P_List.Name = "P_List"
-P_List.Parent = Potions_N
-P_List.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
-P_List.BackgroundTransparency = 0.020
-P_List.BorderSizePixel = 0
-P_List.ClipsDescendants = true
-P_List.Position = UDim2.new(0.00200000009, 0, 0.970000029, 0)
-P_List.Size = UDim2.new(0, 188, 0, 0)
-P_List.Visible = true
-
-UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.83, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
-UIGradient_3.Parent = Potions_N
-
 Potions_C.Name = "Potions_C"
 Potions_C.Parent = Potions_N
 Potions_C.BackgroundTransparency = 1.000
@@ -379,6 +372,19 @@ Potions_C.MouseButton1Down:Connect(function()
 		C_Moving = false
 	end 
 end)
+
+P_List.Name = "P_List"
+P_List.Parent = Potions_N
+P_List.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
+P_List.BackgroundTransparency = 0.020
+P_List.BorderSizePixel = 0
+P_List.ClipsDescendants = true
+P_List.Position = UDim2.new(0.00200000009, 0, 0.970000029, 0)
+P_List.Size = UDim2.new(0, 188, 0, 0)
+P_List.Visible = true
+
+UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.83, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
+UIGradient_3.Parent = Potions_N
 
 P_Label.Name = "P_Label"
 P_Label.Parent = Body
@@ -462,18 +468,30 @@ spawn(function()
 	while wait(1) do
 		pcall(function()
 			if not LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame") then
+			    C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0); C_Label.Text = "Currently:  Idle"; g_Constraint = false
 				Warning_Label.Visible = true
 				repeat Warning_Icon.Visible = not Warning_Icon.Visible; wait(1) until LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
 				Warning_Label.Visible = false
 				Warning_Icon.Visible = false
 			elseif not ((g_Constraint and C_Indicator.ImageColor3 == Color3.fromRGB(0, 255, 0) and C_Label.Text == "Currently:  Brewing Potions")
-			            or ((not g_Constraint) and C_Indicator.ImageColor3 == Color3.fromRGB(255, 0, 0) and (C_Label.Text == "Currently:  Idle" or C_Label.Text == "ERROR!  No potions to brew!"))) then
-                C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0)
-                C_Label.Text = "Currently:  Idle"
-                g_Constraint = false
+				or ((not g_Constraint) and C_Indicator.ImageColor3 == Color3.fromRGB(255, 0, 0) and (C_Label.Text == "Currently:  Idle" or C_Label.Text == "ERROR!  No potions to brew!"))) then
+				C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0); C_Label.Text = "Currently:  Idle"; g_Constraint = false
 			end
 		end)
 	end
+end)
+
+spawn(function()
+    while wait(1) do
+        pcall(function()
+            for i = 1, 2 do
+                if Potions_B["P_Label"..i].Text ~= P_list[i] then Potions_B["P_Label"..i].Text = P_list[i] end
+            end
+            for i = 1, #g_P do
+                if P_List["Recipe"..i].Text ~= g_P[i] then P_List["Recipe"..i].Text = g_P[i] end
+            end
+        end)
+    end
 end)
 
 pcall(function()
@@ -496,6 +514,7 @@ pcall(function()
 		Temp.TextStrokeTransparency = 0.750
 
 		table.insert(images, tostring(temp.ItemImage.Image))
+		table.insert(g_P, temp.ItemName.Text)
 
 		t_UIC.CornerRadius = UDim.new(0, 8)
 		t_UIC.Parent = Temp
@@ -510,10 +529,11 @@ pcall(function()
 			for x = 1, 2 do
 				if Potions_B["P_Label"..x].Text == "Empty Potion Slot" then
 					Potions_B["P_Label"..x].Text = v.Text; 
-					Potions_B["P_Label"..x].ImageTransparency = 0
-					Potions_B["P_Label"..x].Image = images[i]
-					Potions_B["P_Label"..x].ImageTransparency = 0
-					Potions_B["P_Bool"..x] = true
+					Potions_B["P_Reset"..x].ImageTransparency = 0
+					Potions_B["P_Image"..x].Image = images[i]
+					Potions_B["P_Image"..x].ImageTransparency = 0
+					Potions_B["P_Bool"..x].Value = true
+					P_list[x] = v.Text
 					break
 				end 
 			end
