@@ -52,7 +52,7 @@ local images = {}
 --Properties:
 
 MainUi_2.Name = name
-MainUi_2.Parent = game.CoreGui
+MainUi_2.Parent = game:GetService("CoreGui")
 MainUi_2.ZIndexBehavior = Enum.ZIndexBehavior.Global
 
 MainFrame.Name = "MainFrame"
