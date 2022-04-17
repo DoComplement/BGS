@@ -1,6 +1,6 @@
 
 local chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 
-	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
+	           'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
 
 local name = ""
 for i = 1, math.random(5, 16) do name = name .. chars[math.random(1, #chars)] end
@@ -54,6 +54,8 @@ local BFrame = LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
 local g_Constraint = false
 local g_UIVis = true
 local images = {}
+local P_list = {"Empty Potion Slot", "Empty Potion Slot", "Empty Potion Slot"}
+local g_P = {}
 --Properties:
 
 MainUi_3.Name = name
@@ -136,6 +138,21 @@ P_Label1.TextSize = 14.000
 
 UICorner_4.Parent = P_Label1
 
+P_Bool1 = Instance.new("BoolValue")
+P_Bool1.Parent = Potions_B
+P_Bool1.Name = "P_Bool1"
+P_Bool1.Value = false
+
+P_Bool2 = Instance.new("BoolValue")
+P_Bool2.Parent = Potions_B
+P_Bool2.Name = "P_Bool2"
+P_Bool2.Value = false
+
+P_Bool3 = Instance.new("BoolValue")
+P_Bool3.Parent = Potions_B
+P_Bool3.Name = "P_Bool3"
+P_Bool3.Value = false
+
 P_Reset1.Name = "P_Reset1"
 P_Reset1.Parent = Potions_B
 P_Reset1.BackgroundTransparency = 1.000
@@ -153,16 +170,20 @@ P_Reset1.MouseButton1Down:Connect(function()
 			Potions_B["P_Reset"..i].ImageTransparency = Potions_B["P_Reset"..(i + 1)].ImageTransparency
 			Potions_B["P_Image"..i].Image = Potions_B["P_Image"..(i + 1)].Image
 			Potions_B["P_Image"..i].ImageTransparency = Potions_B["P_Image"..(i + 1)].ImageTransparency
+			Potions_B["P_Bool"..i].Value = Potions_B["P_Bool"..(i + 1)].Value
+			P_list[i] = Potions_B["P_Label"..i].Text
 		end
 		if P_Label3.Text ~= "Empty Potion Slot" then
 		    P_Label3.Text = "Empty Potion Slot"
 		    P_Reset3.ImageTransparency = 0.5
 		    P_Image3.ImageTransparency = 1
+		    P_Bool3.Value = false
+		    P_list[3] = P_Label3.Text
 		end
 		if g_Constraint and P_Label1.Text == "Empty Potion Slot" then
-				g_Constraint = false
-				C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0)
-				C_Label.Text = "Currently:  Idle"
+			g_Constraint = false
+			C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0)
+			C_Label.Text = "Currently:  Idle"
 		end
 	end
 end)
@@ -182,11 +203,15 @@ P_Reset2.MouseButton1Down:Connect(function()
 		P_Label2.Text = P_Label3.Text
 		P_Image2.Image = P_Image3.Image
 		P_Image2.ImageTransparency = P_Image3.ImageTransparency
-		P_Reset3.ImageTransparency = P_Reset3.ImageTransparency
+		P_Reset2.ImageTransparency = P_Reset3.ImageTransparency
+		P_Bool2.Value = P_Bool3.Value
+		P_list[2] = P_Label2.Text
 		if P_Label3.Text ~= "Empty Potion Slot" then
 		    P_Label3.Text = "Empty Potion Slot"
 		    P_Image3.ImageTransparency = 1
 		    P_Reset3.ImageTransparency = 0.5
+		    P_Bool3.Value = false
+		    P_list[3] = P_Label3.Text
 	    end
 	end
 end)
@@ -250,6 +275,8 @@ P_Reset3.MouseButton1Down:Connect(function()
 		P_Label3.Text = "Empty Potion Slot"
 		P_Reset3.ImageTransparency = 0.5
 		P_Image3.ImageTransparency = 1
+		P_Bool3.Value = false
+		P_list[3] = P_Label3.Text
 	end
 end)
 
@@ -451,8 +478,8 @@ Main_C.MouseButton1Down:Connect(function()
 	if Main_C.Rotation == 0 and not Main_Moving then
 		Main_Moving = true
 		if Potions_C.Rotation == 0 then 
-			P_List:TweenSize(UDim2.new(0, 188, 0, 0), "Out", "Sine", 0.5, true) 
-			repeat Potions_C.Rotation = Potions_C.Rotation + 10 wait(0.01) until Potions_C.Rotation == 90 
+		    P_List:TweenSize(UDim2.new(0, 188, 0, 0), "Out", "Sine", 0.5, true) 
+		    repeat Potions_C.Rotation = Potions_C.Rotation + 10 wait(0.01) until Potions_C.Rotation == 90 
 		end
 		Potions_C.Visible = false
 		Body:TweenSize(UDim2.new(0, 255, 0, 0), "Out", "Sine", 0.5, true)
@@ -502,18 +529,30 @@ spawn(function()
 	while wait(1) do
 		pcall(function()
 			if not LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame") then
+			    C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0); C_Label.Text = "Currently:  Idle"; g_Constraint = false
 				Warning_Label.Visible = true
 				repeat Warning_Icon.Visible = not Warning_Icon.Visible; wait(1) until LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
 				Warning_Label.Visible = false
 				Warning_Icon.Visible = false
 			elseif not ((g_Constraint and C_Indicator.ImageColor3 == Color3.fromRGB(0, 255, 0) and C_Label.Text == "Currently:  Brewing Potions")
 				or ((not g_Constraint) and C_Indicator.ImageColor3 == Color3.fromRGB(255, 0, 0) and (C_Label.Text == "Currently:  Idle" or C_Label.Text == "ERROR!  No potions to brew!"))) then
-				C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0)
-				C_Label.Text = "Currently:  Idle"
-				g_Constraint = false
+				C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0); C_Label.Text = "Currently:  Idle"; g_Constraint = false
 			end
 		end)
 	end
+end)
+
+spawn(function()
+    while wait(1) do
+        pcall(function()
+            for i = 1, 3 do
+                if Potions_B["P_Label"..i].Text ~= P_list[i] then Potions_B["P_Label"..i].Text = P_list[i] end
+            end
+            for i = 1, #g_P do
+                if P_List["Recipe"..i].Text ~= g_P[i] then P_List["Recipe"..i].Text = g_P[i] end
+            end
+        end)
+    end
 end)
 
 pcall(function()
@@ -536,6 +575,7 @@ pcall(function()
 		Temp.TextStrokeTransparency = 0.750
 
 		table.insert(images, tostring(temp.ItemImage.Image))
+		table.insert(g_P, temp.ItemName.Text)
 
 		t_UIC.CornerRadius = UDim.new(0, 8)
 		t_UIC.Parent = Temp
@@ -548,11 +588,13 @@ pcall(function()
 
 		v.MouseButton1Down:Connect(function()
 			for x = 1, 3 do
-				if Potions_B:FindFirstChild("P_Label"..x).Text == "Empty Potion Slot" then
-					Potions_B:FindFirstChild("P_Label"..x).Text = v.Text; 
-					Potions_B:FindFirstChild("P_Reset"..x).ImageTransparency = 0
-					Potions_B:FindFirstChild("P_Image"..x).Image = images[i]
-					Potions_B:FindFirstChild("P_Image"..x).ImageTransparency = 0
+				if Potions_B["P_Label"..x].Text == "Empty Potion Slot" then
+					Potions_B["P_Label"..x].Text = v.Text
+					Potions_B["P_Reset"..x].ImageTransparency = 0
+					Potions_B["P_Image"..x].Image = images[i]
+					Potions_B["P_Image"..x].ImageTransparency = 0
+					Potions_B["P_Bool"..x].Value = true
+					P_list[x] = v.Text
 					break
 				end 
 			end
