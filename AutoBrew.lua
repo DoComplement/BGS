@@ -5,36 +5,37 @@ local Event = game:GetService("ReplicatedStorage").NetworkRemoteEvent
 local LP = game:GetService("Players").LocalPlayer
 local Frame
 local Potions
-local UI
 local g_
 local p_Q = {}
 local sum = 0
 local p_Max = 1
 
 if not LP:FindFirstChild("leaderstats") then repeat wait(1) until LP:FindFirstChild("leaderstats") end
+local s = {"Codes", "Index", "Boosts", "Prizes"}; local b = false
+for i = 1, #s do LP.PlayerGui.ScreenGui.StatsFrame[s[i]].Visible = b end
+LP.PlayerGui.ScreenGui.StatsFrame.Coins.More.Visible = b
+LP.PlayerGui.ScreenGui.StatsFrame.Gems.More.Visible = b
+LP.PlayerGui.ScreenGui.MainButtons.Visible = b
+LP.PlayerGui.ScreenGui.Settings.Visible = b
 wait(3)
 LP.Character:FindFirstChild("HumanoidRootPart").Anchored = true
 
 -- teleports the user to the lab and repeatedly teleports the user to the NPC until the frame is loaded
-pcall(function()
-    if (not LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")) then
-        Event:FireServer("Teleport", "LabSpawn"); wait(0.5)
-        LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1740.89038, 2705.99048, 11044.1572, -0.984202802, -4.41739587e-08, -0.177044764, -3.80400742e-08, 1, -3.80401666e-08, 0.177044764, -3.07044417e-08, -0.984202802)
-    end 
+if (not LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")) then
+    Event:FireServer("Teleport", "LabSpawn"); 
+    LP.PlayerGui.ScreenGui.MainButtons.Visible = false; wait(0.5)
+    LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1740.89038, 2705.99048, 11044.1572, -0.984202802, -4.41739587e-08, -0.177044764, -3.80400742e-08, 1, -3.80401666e-08, 0.177044764, -3.07044417e-08, -0.984202802)
+end 
     
-    Frame = LP.PlayerGui.ScreenGui:WaitForChild("BrewingFrame")
-    if Frame.Brewing.Brew3.Gamepass.Visible then 
-        g_ = 2
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/DoComplement/BGS/main/UI/Two"))()
-    else
-        g_ = 3
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/DoComplement/BGS/main/UI/Three"))()
-    end 
-end)
-
+Frame = LP.PlayerGui.ScreenGui:WaitForChild("BrewingFrame")
+if Frame.Brewing.Brew3.Gamepass.Visible then 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/DoComplement/BGS/main/UI/Two"))(); g_ = 2
+else
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/DoComplement/BGS/main/UI/Three"))(); g_ = 3
+end 
 
 for i,v in pairs(game:GetService("CoreGui"):GetChildren()) do
-    if v:FindFirstChild("MainFrame") then UI = v; Potions = v.MainFrame.Body.Potions_N.P_List end
+    if v:FindFirstChild("MainFrame") then Potions = v.MainFrame.Body.Potions_N.P_List end
 end
 
 for i = 1, #Potions:GetChildren()/2 do table.insert(p_Q, 0) end
@@ -43,7 +44,7 @@ Frame.Visible = false
 
 -- checks if either the skip frame is visible, given the visibile attribute value of the parent Brewing frame
 local function checkSkip(i)
-    return (Frame.Brewing:FindFirstChild("Brew"..i).Brewing.Visible and Frame.Brewing:FindFirstChild("Brew"..i).Brewing.Skip.Visible)
+    return (Frame.Brewing["Brew"..i].Brewing.Visible and Frame.Brewing["Brew"..i].Brewing.Skip.Visible)
 end
         
 -- returns the index of a potion in the list based on the name of the potion in the parameter - str -
@@ -54,92 +55,93 @@ local function getPotion(str)
 end
 
 local function getp1_F()
-    pcall(function()
-        local m_B = LP.PlayerGui.ScreenGui.MainButtons
-        local m_UIL = m_B.UIListLayout
+    local m_B = LP.PlayerGui.ScreenGui.MainButtons
+    local m_UIL = m_B.UIListLayout
             
-        for i, v in pairs(m_B:GetChildren()) do 
-            if v:IsA("ImageButton") and v.Name ~= "Pets" then v.Visible = false end
-        end
+    m_UIL.Parent = LP.PlayerGui; m_B.Visible = true
+    for i,v in pairs(m_B:GetChildren()) do if v:IsA("ImageButton") and v.Name ~= "Pets" then v.Visible = false end end
             
-        m_UIL.Parent = LP.PlayerGui
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "Waiting for PetsFrame...",
-            Text = "Please open your PetsFrame to initialize the potion quantities",
-            Duration = 5
-        })
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Waiting for PetsFrame...",
+        Text = "Please open your PetsFrame to initialize the potion quantities",
+        Duration = 5
+    })
             
-        repeat wait(); m_B.Pets.Position = UDim2.new(0, LP:GetMouse().X - 1700, 0, LP:GetMouse().Y - 539) 
-        until LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
-        m_B.Pets.Visible = false
-        m_UIL.Parent = m_B
-    end)
+    repeat wait(); m_B.Pets.Position = UDim2.new(0, LP:GetMouse().X - 1700, 0, LP:GetMouse().Y - 539) 
+    until LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
+        
+    m_B.Pets.Visible = false
+    m_UIL.Parent = m_B
 end
 
 local function getp2_F()
-    pcall(function()
-        local p_F = LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
-        local p_UIL = p_F.Tabs.UIListLayout
+    local p_F = LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
+    local p_UIL = p_F.Tabs.UIListLayout
         
-        p_UIL.Parent = LP.PlayerGui
-        p_F.Main.Visible = false
-        p_F.Stats.Visible = false
-        p_F.Main.Pages.Potions.List.Grid.UIGridLayout.CellSize = UDim2.new(0, 10, 0, 10)
-        for i, v in pairs(p_F.Tabs:GetChildren()) do
-            if v.Name ~= "Potions" then v.Visible = false end
-        end
+    for i, v in pairs(p_F.Tabs:GetChildren()) do
+        if v:IsA("ImageButton") then v.Visible = false end
+    end
         
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "PetsFrame found...",
-            Text = "Please open your Potions tab to initialize the potion quantities",
-            Duration = 5
-        }) 
+    p_F.Main.Visible = false
+    p_F.Stats.Visible = false
+    p_UIL.Parent = LP.PlayerGui
+    p_F.Main.Pages.Potions.List.Grid.UIGridLayout.CellSize = UDim2.new(0, 10, 0, 10)
         
-        repeat wait(); p_F.Tabs.Potions.Position = UDim2.new(0, LP:GetMouse().X - 1436, 0, LP:GetMouse().Y - 202)
-        until p_F.Main.Title.Text == "My Potions"
-        p_F.Tabs.Potions.Visible = false
-        p_UIL.Parent = p_F.Tabs
-   end)
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "PetsFrame found...",
+        Text = "Please open your Potions tab to initialize the potion quantities",
+        Duration = 5
+    }) 
+        
+    wait(1)
+    p_F.Tabs.Potions.Visible = true
+    repeat wait(); p_F.Tabs.Potions.Position = UDim2.new(0, LP:GetMouse().X - 1436, 0, LP:GetMouse().Y - 202)
+    until p_F.Main.Title.Text == "My Potions"
+    p_F.Tabs.Potions.Visible = false
+    p_UIL.Parent = p_F.Tabs
 end    
 
-Event:FireServer("Teleport", "LabLeaveSpawn"); wait(0.5)
+Event:FireServer("Teleport", "LabLeaveSpawn"); LP.PlayerGui.ScreenGui.MainButtons.Visible = false; wait(0.5)
 LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1697.16882, 1855.47021, 11037.1455, 1, 0, -1.93564623e-10, 0, 1, 0, 1.93564623e-10, 0, 1)
 wait(2)
 -- sequnce of forced steps to get the user to open their PetsFrame to initialize the amount of potions the user has
-pcall(function()
-    getp1_F(); wait(1); getp2_F() 
+getp1_F(); getp2_F() 
+local p_F = LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
+if p_Max == 1 then p_Max = tonumber(string.sub(p_F.Main.Counters.Stored.Amount.Text, string.find(p_F.Main.Counters.Stored.Amount.Text, "/") + 1, string.len(p_F.Main.Counters.Stored.Amount.Text))) end
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "Potions tab found...",
+    Text = "Processing potion quantities...",
+    Duration = 5
+}) 
+    
+wait(3) -- data may take a few seconds to load
+for i,v in pairs(p_F.Main.Pages.Potions.List.Grid:GetChildren()) do
+    if v:FindFirstChild("Detail") then p_Q[getPotion(v.Detail.Inner.PotionName.Text)] = p_Q[getPotion(v.Detail.Inner.PotionName.Text)] + 1; sum = sum + 1 end
+end
 
-    local p_F = LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
-    if p_Max == 1 then p_Max = tonumber(string.sub(p_F.Main.Counters.Stored.Amount.Text, string.find(p_F.Main.Counters.Stored.Amount.Text, "/") + 1, string.len(p_F.Main.Counters.Stored.Amount.Text))) end
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Potions tab found...",
-        Text = "Processing potion quantities...",
-        Duration = 5
-    }) 
+p_F.Main.Pages.Potions.List.Grid.UIGridLayout.CellSize = UDim2.new(0, 115, 0, 115)
+LP.PlayerGui.ScreenGui.MainButtons.Pets.Position = UDim2.new(0, 0, 0, 0)
+p_F.Tabs.Potions.Position = UDim2.new(1, 5, 0, 0)
+p_F.Main.Visible = true
+p_F.Stats.Visible = true
+for i, v in pairs(LP.PlayerGui.ScreenGui.MainButtons:GetChildren()) do
+    if v:IsA("ImageButton") then v.Visible = true end
+end
+for i, v in pairs(p_F.Tabs:GetChildren()) do
+    if v:IsA("ImageButton") then v.Visible = true end
+end
     
-    wait(3) -- data may take a few seconds to load
-    for i,v in pairs(p_F.Main.Pages.Potions.List.Grid:GetChildren()) do
-        if v:FindFirstChild("Detail") then p_Q[getPotion(v.Detail.Inner.PotionName.Text)] = p_Q[getPotion(v.Detail.Inner.PotionName.Text)] + 1; sum = sum + 1 end
-    end
-    
-    p_F.Main.Pages.Potions.List.Grid.UIGridLayout.CellSize = UDim2.new(0, 115, 0, 115)
-    LP.PlayerGui.ScreenGui.MainButtons.Pets.Position = UDim2.new(0, 0, 0, 0)
-    p_F.Tabs.Potions.Position = UDim2.new(1, 5, 0, 0)
-    p_F.Main.Visible = true
-    p_F.Stats.Visible = true
-    for i, v in pairs(LP.PlayerGui.ScreenGui.MainButtons:GetChildren()) do
-        if v:IsA("ImageButton") then v.Visible = true end
-    end
-    for i, v in pairs(p_F.Tabs:GetChildren()) do
-        if v:IsA("ImageButton") then v.Visible = true end
-    end
-    
-    Event:FireServer("Teleport", "LabSpawn"); wait(0.5)
-    LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1740.89038, 2705.99048, 11044.1572, -0.984202802, -4.41739587e-08, -0.177044764, -3.80400742e-08, 1, -3.80401666e-08, 0.177044764, -3.07044417e-08, -0.984202802)
-    LP.PlayerGui.ScreenGui:WaitForChild("BrewingFrame")
-    Event:FireServer("Teleport", "LabLeaveSpawn")
-    LP.Character["HumanoidRootPart"].Anchored = false
-end)
+Event:FireServer("Teleport", "LabSpawn"); wait(0.5)
+LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1740.89038, 2705.99048, 11044.1572, -0.984202802, -4.41739587e-08, -0.177044764, -3.80400742e-08, 1, -3.80401666e-08, 0.177044764, -3.07044417e-08, -0.984202802)
+LP.PlayerGui.ScreenGui:WaitForChild("BrewingFrame")
+Event:FireServer("Teleport", "LabLeaveSpawn")
+local s = {"Codes", "Index", "Boosts", "Prizes"}; local b = true
+for i = 1, #s do LP.PlayerGui.ScreenGui.StatsFrame[s[i]].Visible = b end
+LP.PlayerGui.ScreenGui.StatsFrame.Coins.More.Visible = b
+LP.PlayerGui.ScreenGui.StatsFrame.Gems.More.Visible = b
+LP.PlayerGui.ScreenGui.Settings.Visible = b
+LP.Character["HumanoidRootPart"].Anchored = false
+
 
 for i = 1, #p_Q do Potions["qRecipe"..i].Text = ":  " .. tostring(p_Q[i]) end
 
