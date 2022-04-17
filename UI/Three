@@ -529,7 +529,6 @@ spawn(function()
 	while wait(1) do
 		pcall(function()
 			if not LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame") then
-			    C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0); C_Label.Text = "Currently:  Idle"; g_Constraint = false
 				Warning_Label.Visible = true
 				repeat Warning_Icon.Visible = not Warning_Icon.Visible; wait(1) until LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
 				Warning_Label.Visible = false
