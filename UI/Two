@@ -52,7 +52,7 @@ local images = {}
 --Properties:
 
 MainUi_2.Name = name
-MainUi_2.Parent = game:GetService("CoreGui")
+MainUi_2.Parent = game.CoreGui
 MainUi_2.ZIndexBehavior = Enum.ZIndexBehavior.Global
 
 MainFrame.Name = "MainFrame"
@@ -130,6 +130,16 @@ P_Label1.TextSize = 14.000
 
 UICorner_4.Parent = P_Label1
 
+P_Bool1 = Instance.new("BoolValue")
+P_Bool1.Parent = Potions_B
+P_Bool1.Name = "P_Bool1"
+P_Bool1.Value = false
+
+P_Bool2 = Instance.new("BoolValue")
+P_Bool2.Parent = Potions_B
+P_Bool2.Name = "P_Bool2"
+P_Bool2.Value = false
+
 P_Reset1.Name = "P_Reset1"
 P_Reset1.Parent = Potions_B
 P_Reset1.BackgroundTransparency = 1
@@ -143,18 +153,20 @@ P_Reset1.ImageTransparency = 0.5
 P_Reset1.MouseButton1Down:Connect(function()
 	if P_Reset1.ImageTransparency ~= 0.5 then
 		P_Label1.Text = P_Label2.Text
-		if P_Label2.Text == "Empty Potion Slot" then
-			P_Reset1.ImageTransparency = 0.5
-			P_Image1.ImageTransparency = 1
-			if g_Constraint then
+		P_Image1.Image = P_Image2.Image
+		P_Image1.ImageTransparency = P_Image2.ImageTransparency
+		P_Reset1.ImageTransparency = P_Reset2.ImageTransparency
+		P_Bool1 = P_Bool2
+		if P_Label2.Text ~= "Empty Potion Slot" then
+		    P_Label2.Text = "Empty Potion Slot"
+		    P_Image2.ImageTransparency = 1
+		    P_Reset2.ImageTransparency = 0.5
+		    P_Bool2 = false
+		end
+        if g_Constraint and P_Label1.Text == "Empty Potion Slot" then
 				g_Constraint = false
 				C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0)
 				C_Label.Text = "Currently:  Idle"
-			end
-		else 
-			P_Label2.Text = "Empty Potion Slot"
-			P_Reset2.ImageTransparency = 0.5
-			P_Image2.ImageTransparency = 1
 		end
 	end
 end)
@@ -174,6 +186,7 @@ P_Reset2.MouseButton1Down:Connect(function()
 		P_Label2.Text = "Empty Potion Slot"
 		P_Reset2.ImageTransparency = 0.5
 		P_Image2.ImageTransparency = 1
+		P_Bool2 = false
 	end
 end)
 
@@ -495,11 +508,12 @@ pcall(function()
 
 		v.MouseButton1Down:Connect(function()
 			for x = 1, 2 do
-				if Potions_B:FindFirstChild("P_Label"..x).Text == "Empty Potion Slot" then
-					Potions_B:FindFirstChild("P_Label"..x).Text = v.Text; 
-					Potions_B:FindFirstChild("P_Reset"..x).ImageTransparency = 0
-					Potions_B:FindFirstChild("P_Image"..x).Image = images[i]
-					Potions_B:FindFirstChild("P_Image"..x).ImageTransparency = 0
+				if Potions_B["P_Label"..x].Text == "Empty Potion Slot" then
+					Potions_B["P_Label"..x].Text = v.Text; 
+					Potions_B["P_Label"..x].ImageTransparency = 0
+					Potions_B["P_Label"..x].Image = images[i]
+					Potions_B["P_Label"..x].ImageTransparency = 0
+					Potions_B["P_Bool"..x] = true
 					break
 				end 
 			end
