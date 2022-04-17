@@ -9,7 +9,7 @@ local UI
 local g_
 local p_Q = {}
 local sum = 0
-local p_Max
+local p_Max = 1
 
 if not LP:FindFirstChild("leaderstats") then repeat wait(1) until LP:FindFirstChild("leaderstats") end
 wait(3)
@@ -53,52 +53,64 @@ local function getPotion(str)
     end
 end
 
+local function getp1_F()
+    pcall(function()
+        local m_B = LP.PlayerGui.ScreenGui.MainButtons
+        local m_UIL = m_B.UIListLayout
+            
+        for i, v in pairs(m_B:GetChildren()) do 
+            if v:IsA("ImageButton") and v.Name ~= "Pets" then v.Visible = false end
+        end
+            
+        m_UIL.Parent = LP.PlayerGui
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "Waiting for PetsFrame...",
+            Text = "Please open your PetsFrame to initialize the potion quantities",
+            Duration = 5
+        })
+            
+        repeat wait(); m_B.Pets.Position = UDim2.new(0, LP:GetMouse().X - 1700, 0, LP:GetMouse().Y - 539) 
+        until LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
+        m_B.Pets.Visible = false
+        m_UIL.Parent = m_B
+    end)
+end
+
+local function getp2_F()
+    pcall(function()
+        local p_F = LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
+        local p_UIL = p_F.Tabs.UIListLayout
+        
+        p_UIL.Parent = LP.PlayerGui
+        p_F.Main.Visible = false
+        p_F.Stats.Visible = false
+        p_F.Main.Pages.Potions.List.Grid.UIGridLayout.CellSize = UDim2.new(0, 10, 0, 10)
+        for i, v in pairs(p_F.Tabs:GetChildren()) do
+            if v.Name ~= "Potions" then v.Visible = false end
+        end
+        
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "PetsFrame found...",
+            Text = "Please open your Potions tab to initialize the potion quantities",
+            Duration = 5
+        }) 
+        
+        repeat wait(); p_F.Tabs.Potions.Position = UDim2.new(0, LP:GetMouse().X - 1436, 0, LP:GetMouse().Y - 202)
+        until p_F.Main.Title.Text == "My Potions"
+        p_F.Tabs.Potions.Visible = false
+        p_UIL.Parent = p_F.Tabs
+   end)
+end    
+
 Event:FireServer("Teleport", "LabLeaveSpawn"); wait(0.5)
 LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1697.16882, 1855.47021, 11037.1455, 1, 0, -1.93564623e-10, 0, 1, 0, 1.93564623e-10, 0, 1)
 wait(2)
--- sequence of forced steps to get the user to open their PetsFrame to initialize the amount of potions the user has
+-- sequnce of forced steps to get the user to open their PetsFrame to initialize the amount of potions the user has
 pcall(function()
-    local m_B = LP.PlayerGui.ScreenGui.MainButtons
-    local m_UIL = m_B.UIListLayout
-    
-    for i, v in pairs(m_B:GetChildren()) do 
-        if v:IsA("ImageButton") and v.Name ~= "Pets" then v.Visible = false end
-    end
-    
-    m_UIL.Parent = LP.PlayerGui
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Waiting for PetsFrame...",
-        Text = "Please open your PetsFrame to initialize the potion quantities",
-        Duration = 5
-    })
-    
-    repeat wait(); m_B.Pets.Position = UDim2.new(0, LP:GetMouse().X - 1700, 0, LP:GetMouse().Y - 539) 
-    until LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
-    m_B.Pets.Visible = false
-    
+    getp1_F(); wait(1); getp2_F() 
+
     local p_F = LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
-    local p_UIL = p_F.Tabs.UIListLayout
-    local t_D = p_F.Main.Pages.Potions.List.Grid
-    t_D.UIGridLayout.CellSize = UDim2.new(0, 10, 0, 10)
-    
-    p_UIL.Parent = LP.PlayerGui
-    p_F.Main.Visible = false
-    p_F.Stats.Visible = false
-    for i, v in pairs(p_F.Tabs:GetChildren()) do
-        if v.Name ~= "Potions" then v.Visible = false end
-    end
-    
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "PetsFrame found...",
-        Text = "Please open your Potions tab to initialize the potion quantities",
-        Duration = 5
-    }) 
-    
-    repeat wait(); p_F.Tabs.Potions.Position = UDim2.new(0, LP:GetMouse().X - 1436, 0, LP:GetMouse().Y - 202)
-    until #p_F.Main.Pages.Potions.List.Grid:GetChildren() > 1 
-    p_F.Tabs.Potions.Visible = false
-    
-    p_Max = tonumber(string.sub(p_F.Main.Counters.Stored.Amount.Text, string.find(p_F.Main.Counters.Stored.Amount.Text, "/") + 1, string.len(p_F.Main.Counters.Stored.Amount.Text)))
+    if p_Max == 1 then p_Max = tonumber(string.sub(p_F.Main.Counters.Stored.Amount.Text, string.find(p_F.Main.Counters.Stored.Amount.Text, "/") + 1, string.len(p_F.Main.Counters.Stored.Amount.Text))) end
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "Potions tab found...",
         Text = "Processing potion quantities...",
@@ -106,18 +118,16 @@ pcall(function()
     }) 
     
     wait(3) -- data may take a few seconds to load
-    for i,v in pairs(t_D:GetChildren()) do
+    for i,v in pairs(p_F.Main.Pages.Potions.List.Grid:GetChildren()) do
         if v:FindFirstChild("Detail") then p_Q[getPotion(v.Detail.Inner.PotionName.Text)] = p_Q[getPotion(v.Detail.Inner.PotionName.Text)] + 1; sum = sum + 1 end
     end
     
-    t_D.UIGridLayout.CellSize = UDim2.new(0, 115, 0, 115)
-    m_B.Pets.Position = UDim2.new(0, 0, 0, 0)
+    p_F.Main.Pages.Potions.List.Grid.UIGridLayout.CellSize = UDim2.new(0, 115, 0, 115)
+    LP.PlayerGui.ScreenGui.MainButtons.Pets.Position = UDim2.new(0, 0, 0, 0)
     p_F.Tabs.Potions.Position = UDim2.new(1, 5, 0, 0)
     p_F.Main.Visible = true
     p_F.Stats.Visible = true
-    m_UIL.Parent = m_B
-    p_UIL.Parent = p_F.Tabs
-    for i, v in pairs(m_B:GetChildren()) do
+    for i, v in pairs(LP.PlayerGui.ScreenGui.MainButtons:GetChildren()) do
         if v:IsA("ImageButton") then v.Visible = true end
     end
     for i, v in pairs(p_F.Tabs:GetChildren()) do
