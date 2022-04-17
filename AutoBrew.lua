@@ -138,14 +138,14 @@ local function checkBrew(str)
     local index = getPotion(str)
     local b
     pcall(function()
-        if index < 3 then b = LP.PlayerGui.leaderstats.Gems.Value >= 10000000; if b then p_Q[index] = p_Q[index] - 1; sum = sum - 1 end
-        elseif index == 3 then b = LP.PlayerGui.leaderstats.Gems.Value >= 15000000; if b then p_Q[3] = p_Q[3] - 1; sum = sum - 1 end
+        if index < 3 then b = LP.leaderstats.Gems.Value >= 10000000; if b then p_Q[index] = p_Q[index] - 1; sum = sum - 1 end
+        elseif index == 3 then b = LP.leaderstats.Gems.Value >= 15000000; if b then p_Q[3] = p_Q[3] - 1; sum = sum - 1 end
         elseif index == 4 then b = p_Q[1] > 2; if b then p_Q[1] = p_Q[1] - 3; sum = sum - 3 end
         elseif index == 5 then b = p_Q[2] > 2; if b then p_Q[2] = p_Q[2] - 3; sum = sum - 3 end
         elseif index == 6 then b = p_Q[3] > 4; if b then p_Q[3] = p_Q[3] - 5; sum = sum - 5 end
         elseif index == 7 then b = (p_Q[6] > 0 and p_Q[4] > 4); if b then p_Q[6] = p_Q[6] - 1; p_Q[4] = p_Q[4] - 5; sum = sum - 6 end
         elseif index == 8 then b = (p_Q[6] > 0 and p_Q[5] > 4); if b then p_Q[6] = p_Q[6] - 1; p_Q[5] = p_Q[5] - 5; sum = sum - 6 end
-        else b = (p_Q[6] > 2 and LP.PlayerGui.leaderstats.Gems.Value >= 250000000); if b then p_Q[6] = p_Q[6] - 3; sum = sum - 3 end end
+        else b = (p_Q[6] > 2 and LP.leaderstats.Gems.Value >= 250000000); if b then p_Q[6] = p_Q[6] - 3; sum = sum - 3 end end
     end)
     return b
 end
