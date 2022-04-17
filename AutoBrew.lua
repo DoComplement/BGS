@@ -163,8 +163,7 @@ spawn(function()
                                     if checkBrew(UI.MainFrame.Body.Potions_B["P_Label"..x].Text) then
                                         Event:FireServer("BrewPotion", getPotion(UI.MainFrame.Body.Potions_B["P_Label"..x].Text)) -- brews the potion
                                         UI.MainFrame.Body.Potions_B["P_Bool"..x].Value = false
-                                        break
-                                    else print("Not enough resources to brew " .. UI.MainFrame.Body.Potions_B["P_Label"..x].Text) end    
+                                    else print("Not enough resources to brew " .. UI.MainFrame.Body.Potions_B["P_Label"..x].Text) end break
                                 end
                             end
                         else
