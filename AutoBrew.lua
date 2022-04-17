@@ -136,8 +136,8 @@ local function checkBrew(str)
     local index = getPotion(str)
     local b
     pcall(function()
-        if index < 3 then b = LP.leaderstats.Gems.Value >= 10000000; if b then p_Q[index] = p_Q[index] - 1 end
-        elseif index == 3 then b = LP.leaderstats.Gems.Value >= 15000000; if b then p_Q[3] = p_Q[3] - 1 end
+        if index < 3 then b = LP.leaderstats.Gems.Value >= 10000000 
+        elseif index == 3 then b = LP.leaderstats.Gems.Value >= 15000000
         elseif index == 4 then b = p_Q[1] > 2; if b then p_Q[1] = p_Q[1] - 3 end
         elseif index == 5 then b = p_Q[2] > 2; if b then p_Q[2] = p_Q[2] - 3 end
         elseif index == 6 then b = p_Q[3] > 4; if b then p_Q[3] = p_Q[3] - 5 end
@@ -150,7 +150,7 @@ end
 
 spawn(function()
     while wait(1) do 
-        for i = 1, #p_Q do if Potions["qRecipe"..i].Text ~= (":  " .. tostring(p_Q[i])) then Potions["qRecipe"..i].Text = (":  " .. tostring(p_Q[i])) end end
+        pcall(function() for i = 1, #p_Q do if Potions["qRecipe"..i].Text ~= (":  " .. tostring(p_Q[i])) then Potions["qRecipe"..i].Text = (":  " .. tostring(p_Q[i])) end end end)
     end
 end)
 
