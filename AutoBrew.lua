@@ -11,7 +11,7 @@ local p_Q = {}
 local sum = 0
 
 if not LP:FindFirstChild("leaderstats") then repeat wait(1) until LP:FindFirstChild("leaderstats") end
-wait(3) -- yolo
+wait(3)
 LP.Character:FindFirstChild("HumanoidRootPart").Anchored = true
 
 -- teleports the user to the lab and repeatedly teleports the user to the NPC until the frame is loaded
@@ -36,7 +36,7 @@ for i,v in pairs(game:GetService("CoreGui"):GetChildren()) do
     if v:FindFirstChild("MainFrame") then UI = v; Potions = v.MainFrame.Body.Potions_N.P_List end
 end
 
-for i = 1, #Potions:GetChildren() do table.insert(p_Q, 0) end
+for i = 1, #Potions:GetChildren()/2 do table.insert(p_Q, 0) end
 if Frame:FindFirstChild("Close") then Frame.Close:Remove() end 
 Frame.Visible = false
 
@@ -105,7 +105,6 @@ pcall(function()
     
     wait(3) -- data may take a few seconds to load
     for i,v in pairs(t_D:GetChildren()) do
-        sum = sum + 1
         if v:FindFirstChild("Detail") then p_Q[getPotion(v.Detail.Inner.PotionName.Text)] = p_Q[getPotion(v.Detail.Inner.PotionName.Text)] + 1 end
     end
     
@@ -130,25 +129,30 @@ pcall(function()
     LP.Character["HumanoidRootPart"].Anchored = false
 end)
 
-print("Total quantity of potions: " .. sum)
-for i = 1, #p_Q do print(Potions["Recipe"..i].Text .. ": " .. p_Q[i] .. " potions in storage") end
+for i = 1, #p_Q do Potions["qRecipe"..i].Text = ":  " .. tostring(p_Q[i]) end
 
 -- checks if the user is capable of brewing some potion
 local function checkBrew(str)
     local index = getPotion(str)
     local b
     pcall(function()
-        if index < 3 then b = LP.leaderstats.Gems.Value >= 10000000; if b then p_Q[index] = p_Q[index] - 1; sum = sum - 1 end
-        elseif index == 3 then b = LP.leaderstats.Gems.Value >= 15000000; if b then p_Q[3] = p_Q[3] - 1; sum = sum - 1 end
-        elseif index == 4 then b = p_Q[1] > 2; if b then p_Q[1] = p_Q[1] - 3; sum = sum - 3 end
-        elseif index == 5 then b = p_Q[2] > 2; if b then p_Q[2] = p_Q[2] - 3; sum = sum - 3 end
-        elseif index == 6 then b = p_Q[3] > 4; if b then p_Q[3] = p_Q[3] - 5; sum = sum - 5 end
-        elseif index == 7 then b = (p_Q[6] > 0 and p_Q[4] > 4); if b then p_Q[6] = p_Q[6] - 1; p_Q[4] = p_Q[4] - 5; sum = sum - 6 end
-        elseif index == 8 then b = (p_Q[6] > 0 and p_Q[5] > 4); if b then p_Q[6] = p_Q[6] - 1; p_Q[5] = p_Q[5] - 5; sum = sum - 6 end
-        else b = (p_Q[6] > 2 and LP.leaderstats.Gems.Value >= 250000000); if b then p_Q[6] = p_Q[6] - 3; sum = sum - 3 end end
+        if index < 3 then b = LP.leaderstats.Gems.Value >= 10000000; if b then p_Q[index] = p_Q[index] - 1 end
+        elseif index == 3 then b = LP.leaderstats.Gems.Value >= 15000000; if b then p_Q[3] = p_Q[3] - 1 end
+        elseif index == 4 then b = p_Q[1] > 2; if b then p_Q[1] = p_Q[1] - 3 end
+        elseif index == 5 then b = p_Q[2] > 2; if b then p_Q[2] = p_Q[2] - 3 end
+        elseif index == 6 then b = p_Q[3] > 4; if b then p_Q[3] = p_Q[3] - 5 end
+        elseif index == 7 then b = (p_Q[6] > 0 and p_Q[4] > 4); if b then p_Q[6] = p_Q[6] - 1; p_Q[4] = p_Q[4] - 5 end
+        elseif index == 8 then b = (p_Q[6] > 0 and p_Q[5] > 4); if b then p_Q[6] = p_Q[6] - 1; p_Q[5] = p_Q[5] - 5 end
+        else b = (p_Q[6] > 2 and LP.leaderstats.Gems.Value >= 250000000); if b then p_Q[6] = p_Q[6] - 3 end end
     end)
     return b
 end
+
+spawn(function()
+    while wait(1) do 
+        for i = 1, #p_Q do if Potions["qRecipe"..i].Text ~= (":  " .. tostring(p_Q[i])) then Potions["qRecipe"..i].Text = (":  " .. tostring(p_Q[i])) end end
+    end
+end)
 
 -- main loop
 spawn(function()
@@ -170,7 +174,7 @@ spawn(function()
                             for x = 1, g_ do 
                                 if Frame.Brewing["Brew"..i].Brewing.ItemName.Text == UI.MainFrame.Body.Potions_B["P_Label"..x].Text and not UI.MainFrame.Body.Potions_B["P_Bool"..x].Value then -- checks collected potion is still being brewed
                                     UI.MainFrame.Body.Potions_B["P_Bool"..x].Value = true
-                                    p_Q[getPotion(UI.MainFrame.Body.Potions_B["P_Label"..x].Text)] = p_Q[getPotion(UI.MainFrame.Body.Potions_B["P_Label"..x].Text)] + 1; sum = sum + 1
+                                    p_Q[getPotion(Frame.Brewing["Brew"..i].Brewing.ItemName.Text)] = p_Q[getPotion(Frame.Brewing["Brew"..i].Brewing.ItemName.Text)] + 1;
                                     break
                                 end
                             end
