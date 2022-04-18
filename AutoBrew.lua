@@ -5,10 +5,11 @@ local Event = game:GetService("ReplicatedStorage").NetworkRemoteEvent
 local LP = game:GetService("Players").LocalPlayer
 local Frame
 local Potions
+local UI
 local g_
 local p_Q = {}
 local sum = 0
-local p_Max = 1
+local p_Max
 
 if not LP:FindFirstChild("leaderstats") then repeat wait(1) until LP:FindFirstChild("leaderstats") end
 local s = {"Codes", "Index", "Boosts", "Prizes"}; local b = false
@@ -35,7 +36,7 @@ else
 end 
 
 for i,v in pairs(game:GetService("CoreGui"):GetChildren()) do
-    if v:FindFirstChild("MainFrame") then Potions = v.MainFrame.Body.Potions_N.P_List end
+    if v:FindFirstChild("MainFrame") then UI = v; Potions = v.MainFrame.Body.Potions_N.P_List end
 end
 
 for i = 1, #Potions:GetChildren()/2 do table.insert(p_Q, 0) end
@@ -107,7 +108,7 @@ wait(2)
 -- sequnce of forced steps to get the user to open their PetsFrame to initialize the amount of potions the user has
 getp1_F(); getp2_F() 
 local p_F = LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
-if p_Max == 1 then p_Max = tonumber(string.sub(p_F.Main.Counters.Stored.Amount.Text, string.find(p_F.Main.Counters.Stored.Amount.Text, "/") + 1, string.len(p_F.Main.Counters.Stored.Amount.Text))) end
+p_Max = tonumber(string.sub(p_F.Main.Counters.Stored.Amount.Text, string.find(p_F.Main.Counters.Stored.Amount.Text, "/") + 1, string.len(p_F.Main.Counters.Stored.Amount.Text))) 
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "Potions tab found...",
     Text = "Processing potion quantities...",
@@ -164,7 +165,7 @@ end
 
 spawn(function()
     while wait(1) do 
-        pcall(function() for i = 1, #p_Q do if Potions["qRecipe"..i].Text ~= (":  " .. tostring(p_Q[i])) then Potions["qRecipe"..i].Text = (":  " .. tostring(p_Q[i])) end end end)
+         pcall(function() for i = 1, #p_Q do if Potions["qRecipe"..i].Text ~= (":  " .. tostring(p_Q[i])) then Potions["qRecipe"..i].Text = (":  " .. tostring(p_Q[i])) end end end)
     end
 end)
 
@@ -198,7 +199,7 @@ spawn(function()
                     end
                 end
             end
-        end)
+       end) 
     end
 end)
 
