@@ -505,7 +505,7 @@ pcall(function()
 		Temp.Parent = P_List
 		Temp.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
 		Temp.BackgroundTransparency = 0.250
-		Temp.Position = UDim2.new(0.101063833, 0, 0.035 + 0.105*(i - 1), 0)
+		Temp.Position = UDim2.new(0.035, 0, 0.035 + 0.105*(i - 1), 0)
 		Temp.Size = UDim2.new(0, 149, 0, 19)
 		Temp.Font = Enum.Font.SourceSans
 		Temp.Text = temp.ItemName.Text
