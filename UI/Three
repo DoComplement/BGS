@@ -1,6 +1,6 @@
 
 local chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 
-	           'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
+	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
 
 local name = ""
 for i = 1, math.random(5, 16) do name = name .. chars[math.random(1, #chars)] end
@@ -48,6 +48,11 @@ local Main_C = Instance.new("ImageButton")
 local Warning_Icon = Instance.new("ImageButton")
 local Warning_Label = Instance.new("TextLabel")
 local Title = Instance.new("TextLabel")
+local Buttons = Instance.new("Frame")
+local Pot_Upd = Instance.new("TextButton")
+local UICorner_12 = Instance.new("UICorner")
+local UIListLayout = Instance.new("UIListLayout")
+
 
 local LP = game:GetService("Players").LocalPlayer
 local BFrame = LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
@@ -174,11 +179,11 @@ P_Reset1.MouseButton1Down:Connect(function()
 			P_list[i] = Potions_B["P_Label"..i].Text
 		end
 		if P_Label3.Text ~= "Empty Potion Slot" then
-		    P_Label3.Text = "Empty Potion Slot"
-		    P_Reset3.ImageTransparency = 0.5
-		    P_Image3.ImageTransparency = 1
-		    P_Bool3.Value = false
-		    P_list[3] = P_Label3.Text
+			P_Label3.Text = "Empty Potion Slot"
+			P_Reset3.ImageTransparency = 0.5
+			P_Image3.ImageTransparency = 1
+			P_Bool3.Value = false
+			P_list[3] = P_Label3.Text
 		end
 		if g_Constraint and P_Label1.Text == "Empty Potion Slot" then
 			g_Constraint = false
@@ -207,12 +212,12 @@ P_Reset2.MouseButton1Down:Connect(function()
 		P_Bool2.Value = P_Bool3.Value
 		P_list[2] = P_Label2.Text
 		if P_Label3.Text ~= "Empty Potion Slot" then
-		    P_Label3.Text = "Empty Potion Slot"
-		    P_Image3.ImageTransparency = 1
-		    P_Reset3.ImageTransparency = 0.5
-		    P_Bool3.Value = false
-		    P_list[3] = P_Label3.Text
-	    end
+			P_Label3.Text = "Empty Potion Slot"
+			P_Image3.ImageTransparency = 1
+			P_Reset3.ImageTransparency = 0.5
+			P_Bool3.Value = false
+			P_list[3] = P_Label3.Text
+		end
 	end
 end)
 
@@ -280,13 +285,21 @@ P_Reset3.MouseButton1Down:Connect(function()
 	end
 end)
 
+Buttons.Name = "Buttons"
+Buttons.Parent = Body
+Buttons.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Buttons.BackgroundTransparency = 1.000
+Buttons.BorderSizePixel = 0
+Buttons.Position = UDim2.new(0.810000002, 0, 0.112999998, 0)
+Buttons.Size = UDim2.new(0, 46, 0, 155)
+
 Event_TP.Name = "Event_TP"
-Event_TP.Parent = Body
+Event_TP.Parent = Buttons
 Event_TP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Event_TP.BackgroundTransparency = 0.660
 Event_TP.BorderSizePixel = 0
-Event_TP.Position = UDim2.new(0.805999994, 0, 0.170000002, 0)
-Event_TP.Size = UDim2.new(0, 40, 0, 26)
+Event_TP.Position = UDim2.new(0.805999994, 0, 0.0299999993, 0)
+Event_TP.Size = UDim2.new(0, 40, 0, 24)
 Event_TP.Font = Enum.Font.SourceSans
 Event_TP.Text = "Event"
 Event_TP.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -300,14 +313,26 @@ UICorner_7.CornerRadius = UDim.new(0, 4)
 UICorner_7.Parent = Event_TP
 
 Inv_GameUi.Name = "Inv_GameUi"
-Inv_GameUi.Parent = Body
+Inv_GameUi.Parent = Buttons
 Inv_GameUi.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Inv_GameUi.BackgroundTransparency = 0.660
 Inv_GameUi.BorderSizePixel = 0
-Inv_GameUi.Position = UDim2.new(0.808000028, 0, 0.50999999, 0)
-Inv_GameUi.Size = UDim2.new(0, 40, 0, 26)
+Inv_GameUi.Position = UDim2.new(0.805999994, 0, 0.430000007, 0)
+Inv_GameUi.Size = UDim2.new(0, 40, 0, 24)
 Inv_GameUi.Font = Enum.Font.SourceSans
-Inv_GameUi.Text = "Inv"
+Inv_GameUi.Text = "Inv."
+Inv_GameUi.TextColor3 = Color3.fromRGB(255, 255, 255)
+Inv_GameUi.TextSize = 14.000
+
+Inv_GameUi.Name = "Inv_GameUi"
+Inv_GameUi.Parent = Buttons
+Inv_GameUi.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Inv_GameUi.BackgroundTransparency = 0.660
+Inv_GameUi.BorderSizePixel = 0
+Inv_GameUi.Position = UDim2.new(0.805999994, 0, 0.430000007, 0)
+Inv_GameUi.Size = UDim2.new(0, 40, 0, 24)
+Inv_GameUi.Font = Enum.Font.SourceSans
+Inv_GameUi.Text = "Inv."
 Inv_GameUi.TextColor3 = Color3.fromRGB(255, 255, 255)
 Inv_GameUi.TextSize = 14.000
 Inv_GameUi.MouseButton1Down:Connect(function()
@@ -327,12 +352,12 @@ UICorner_8.CornerRadius = UDim.new(0, 4)
 UICorner_8.Parent = Inv_GameUi
 
 Lab_TP.Name = "Lab_TP"
-Lab_TP.Parent = Body
+Lab_TP.Parent = Buttons
 Lab_TP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Lab_TP.BackgroundTransparency = 0.660
 Lab_TP.BorderSizePixel = 0
-Lab_TP.Position = UDim2.new(0.808000028, 0, 0.340000004, 0)
-Lab_TP.Size = UDim2.new(0, 40, 0, 26)
+Lab_TP.Position = UDim2.new(0.805999994, 0, 0.230000004, 0)
+Lab_TP.Size = UDim2.new(0, 40, 0, 24)
 Lab_TP.Font = Enum.Font.SourceSans
 Lab_TP.Text = "Lab"
 Lab_TP.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -346,12 +371,12 @@ UICorner_9.CornerRadius = UDim.new(0, 4)
 UICorner_9.Parent = Lab_TP
 
 Inv_Ui.Name = "Inv_Ui"
-Inv_Ui.Parent = Body
+Inv_Ui.Parent = Buttons
 Inv_Ui.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Inv_Ui.BackgroundTransparency = 0.660
 Inv_Ui.BorderSizePixel = 0
-Inv_Ui.Position = UDim2.new(0.807746291, 0, 0.68690443, 0)
-Inv_Ui.Size = UDim2.new(0, 40, 0, 26)
+Inv_Ui.Position = UDim2.new(0.805999994, 0, 0.620000005, 0)
+Inv_Ui.Size = UDim2.new(0, 40, 0, 24)
 Inv_Ui.Font = Enum.Font.SourceSans
 Inv_Ui.Text = "UI"
 Inv_Ui.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -362,6 +387,25 @@ end)
 
 UICorner_10.CornerRadius = UDim.new(0, 4)
 UICorner_10.Parent = Inv_Ui
+
+Pot_Upd.Name = "Pot_Upd"
+Pot_Upd.Parent = Buttons
+Pot_Upd.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Pot_Upd.BackgroundTransparency = 0.660
+Pot_Upd.BorderSizePixel = 0
+Pot_Upd.Position = UDim2.new(0.805999994, 0, 0.810000002, 0)
+Pot_Upd.Size = UDim2.new(0, 40, 0, 24)
+Pot_Upd.Font = Enum.Font.SourceSans
+Pot_Upd.Text = "Upd."
+Pot_Upd.TextColor3 = Color3.fromRGB(255, 255, 255)
+Pot_Upd.TextSize = 14.000
+
+UICorner_12.CornerRadius = UDim.new(0, 4)
+UICorner_12.Parent = Pot_Upd
+
+UIListLayout.Parent = Buttons
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0.0399999991, 0)
 
 C_Indicator.Name = "C_Indicator"
 C_Indicator.Parent = Body
@@ -478,8 +522,8 @@ Main_C.MouseButton1Down:Connect(function()
 	if Main_C.Rotation == 0 and not Main_Moving then
 		Main_Moving = true
 		if Potions_C.Rotation == 0 then 
-		    P_List:TweenSize(UDim2.new(0, 188, 0, 0), "Out", "Sine", 0.5, true) 
-		    repeat Potions_C.Rotation = Potions_C.Rotation + 10 wait(0.01) until Potions_C.Rotation == 90 
+			P_List:TweenSize(UDim2.new(0, 188, 0, 0), "Out", "Sine", 0.5, true) 
+			repeat Potions_C.Rotation = Potions_C.Rotation + 10 wait(0.01) until Potions_C.Rotation == 90 
 		end
 		Potions_C.Visible = false
 		Body:TweenSize(UDim2.new(0, 255, 0, 0), "Out", "Sine", 0.5, true)
@@ -542,16 +586,16 @@ spawn(function()
 end)
 
 spawn(function()
-    while wait(1) do
-        pcall(function()
-            for i = 1, 3 do
-                if Potions_B["P_Label"..i].Text ~= P_list[i] then Potions_B["P_Label"..i].Text = P_list[i] end
-            end
-            for i = 1, #g_P do
-                if P_List["Recipe"..i].Text ~= g_P[i] then P_List["Recipe"..i].Text = g_P[i] end
-            end
-        end)
-    end
+	while wait(1) do
+		pcall(function()
+			for i = 1, 3 do
+				if Potions_B["P_Label"..i].Text ~= P_list[i] then Potions_B["P_Label"..i].Text = P_list[i] end
+			end
+			for i = 1, #g_P do
+				if P_List["Recipe"..i].Text ~= g_P[i] then P_List["Recipe"..i].Text = g_P[i] end
+			end
+		end)
+	end
 end)
 
 pcall(function()
@@ -573,7 +617,7 @@ pcall(function()
 		Temp.TextColor3 = Color3.fromRGB(255, 255, 255)
 		Temp.TextSize = 14.000
 		Temp.TextStrokeTransparency = 0.750
-		
+
 		TextLabel.Name = "q"..temp.Name
 		TextLabel.Parent = P_List
 		TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -585,7 +629,7 @@ pcall(function()
 		TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 		TextLabel.TextSize = 14.000
 		TextLabel.TextStrokeTransparency = 0.750
-        	TextLabel.TextXAlignment = "Left"
+		TextLabel.TextXAlignment = "Left"
 
 		table.insert(images, tostring(temp.ItemImage.Image))
 		table.insert(g_P, temp.ItemName.Text)
