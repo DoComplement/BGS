@@ -359,6 +359,11 @@ B_Indicator.ZIndex = 2
 B_Indicator.Image = "rbxassetid://3926309567"
 B_Indicator.ImageRectOffset = Vector2.new(628, 420)
 B_Indicator.ImageRectSize = Vector2.new(48, 48)
+B_Indicator.MouseButton1Down:Connect(function()
+	if b_Constraint then B_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0)
+	else B_Color.BackgroundColor3 = Color3.fromRGB(0, 214, 0) end
+	b_Constraint = not b_Constraint
+end)
 
 B_Color.Name = "B_Color"
 B_Color.Parent = B_Indicator
