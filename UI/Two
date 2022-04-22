@@ -32,17 +32,22 @@ local Buttons = Instance.new("Frame")
 local UICorner_8 = Instance.new("UICorner")
 local Inv_Ui = Instance.new("TextButton")
 local UICorner_9 = Instance.new("UICorner")
-local C_Indicator = Instance.new("ImageButton")
 local C_Label = Instance.new("TextLabel")
 local Potions_N = Instance.new("Frame")
 local UICorner_10 = Instance.new("UICorner")
 local Pot_Upd = Instance.new("TextButton")
-local UICorner_10 = Instance.new("UICorner")
+local UICorner_11 = Instance.new("UICorner")
 local UIListLayout = Instance.new("UIListLayout")
 local Potions_C = Instance.new("ImageButton")
 local P_List = Instance.new("Frame")
 local UIGradient_3 = Instance.new("UIGradient")
 local P_Label = Instance.new("TextLabel")
+local B_Indicator = Instance.new("ImageButton")
+local B_Color = Instance.new("TextLabel")
+local UICorner_12 = Instance.new("UICorner")
+local C_Indicator = Instance.new("ImageButton")
+local C_Color = Instance.new("TextLabel")
+local UICorner_13 = Instance.new("UICorner")
 local Main_C = Instance.new("ImageButton")
 local Warning_Icon = Instance.new("ImageButton")
 local Warning_Label = Instance.new("TextLabel")
@@ -52,6 +57,7 @@ local LP = game:GetService("Players").LocalPlayer
 local BFrame = LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
 local g_Constraint = false
 local g_UIVis = true
+local b_Constraint = false
 local images = {}
 local P_list = {"Empty Potion Slot", "Empty Potion Slot"}
 local g_P = {}
@@ -174,7 +180,7 @@ P_Reset1.MouseButton1Down:Connect(function()
 		end
 		if g_Constraint and P_Label1.Text == "Empty Potion Slot" then
 			g_Constraint = false
-			C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0)
+			C_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0)
 			C_Label.Text = "Currently:  Idle"
 		end
 	end
@@ -344,28 +350,62 @@ C_Label.TextColor3 = Color3.fromRGB(255, 255, 255)
 C_Label.TextSize = 14.000
 C_Label.TextXAlignment = Enum.TextXAlignment.Left
 
+B_Indicator.Name = "B_Indicator"
+B_Indicator.Parent = Body
+B_Indicator.BackgroundTransparency = 1.000
+B_Indicator.Position = UDim2.new(0.670588255, 0, 0.0136054419, 0)
+B_Indicator.Size = UDim2.new(0, 23, 0, 23)
+B_Indicator.ZIndex = 2
+B_Indicator.Image = "rbxassetid://3926309567"
+B_Indicator.ImageRectOffset = Vector2.new(628, 420)
+B_Indicator.ImageRectSize = Vector2.new(48, 48)
+
+B_Color.Name = "B_Color"
+B_Color.Parent = B_Indicator
+B_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0)
+B_Color.Position = UDim2.new(0.270000011, 0, 0.270000011, 0)
+B_Color.Size = UDim2.new(0, 11, 0, 11)
+B_Color.Font = Enum.Font.SourceSans
+B_Color.Text = ""
+B_Color.TextColor3 = Color3.fromRGB(0, 0, 0)
+B_Color.TextSize = 14.000
+
+UICorner_12.CornerRadius = UDim.new(0, 100)
+UICorner_12.Parent = B_Color
+
 C_Indicator.Name = "C_Indicator"
 C_Indicator.Parent = Body
 C_Indicator.BackgroundTransparency = 1.000
-C_Indicator.Position = UDim2.new(0.0329999998, 0, 0.0149999997, 0)
-C_Indicator.Size = UDim2.new(0, 24, 0, 24)
+C_Indicator.Position = UDim2.new(0.0392156877, 0, 0.0136054419, 0)
+C_Indicator.Size = UDim2.new(0, 23, 0, 23)
 C_Indicator.ZIndex = 2
-C_Indicator.Image = "rbxassetid://3926307971"
-C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0)
-C_Indicator.ImageRectOffset = Vector2.new(644, 44)
-C_Indicator.ImageRectSize = Vector2.new(36, 36)
-C_Indicator.ImageTransparency = 0.200
+C_Indicator.Image = "rbxassetid://3926309567"
+C_Indicator.ImageRectOffset = Vector2.new(628, 420)
+C_Indicator.ImageRectSize = Vector2.new(48, 48)
 C_Indicator.MouseButton1Down:Connect(function()
 	if Potions_B.P_Label1.Text == "Empty Potion Slot" then
-		C_Label.Text = "ERROR!  No potions to brew!"
+		C_Label.Text = "No potions to brew!"
 		wait(4)
 		if not g_Constraint then C_Label.Text = "Currently:  Idle" end
 	else
-		if g_Constraint then C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0); C_Label.Text = "Currently:  Idle"
-		else C_Indicator.ImageColor3 = Color3.fromRGB(0, 255, 0); C_Label.Text = "Currently:  Brewing Potions" end
+		if g_Constraint then C_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0); C_Label.Text = "Currently:  Idle"
+		else C_Color.BackgroundColor3 = Color3.fromRGB(0, 214, 0); C_Label.Text = "Currently:  Brewing Potions" end
 		g_Constraint = not g_Constraint
 	end
 end)
+
+C_Color.Name = "C_Color"
+C_Color.Parent = C_Indicator
+C_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0)
+C_Color.Position = UDim2.new(0.270000011, 0, 0.270000011, 0)
+C_Color.Size = UDim2.new(0, 11, 0, 11)
+C_Color.Font = Enum.Font.SourceSans
+C_Color.Text = ""
+C_Color.TextColor3 = Color3.fromRGB(0, 0, 0)
+C_Color.TextSize = 14.000
+
+UICorner_13.CornerRadius = UDim.new(0, 100)
+UICorner_13.Parent = C_Color
 
 Potions_N.Name = "Potions_N"
 Potions_N.Parent = Body
@@ -374,8 +414,8 @@ Potions_N.BackgroundTransparency = 0.600
 Potions_N.Position = UDim2.new(0.0352941193, 0, 0.83522296, 0)
 Potions_N.Size = UDim2.new(0, 188, 0, 19)
 
-UICorner_10.CornerRadius = UDim.new(0, 3)
-UICorner_10.Parent = Potions_N
+UICorner_11.CornerRadius = UDim.new(0, 3)
+UICorner_11.Parent = Potions_N
 
 Potions_C.Name = "Potions_C"
 Potions_C.Parent = Potions_N
@@ -503,12 +543,16 @@ spawn(function()
 				repeat Warning_Icon.Visible = not Warning_Icon.Visible; wait(1) until LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
 				Warning_Label.Visible = false
 				Warning_Icon.Visible = false
-			elseif not ((g_Constraint and C_Indicator.ImageColor3 == Color3.fromRGB(0, 255, 0) and C_Label.Text == "Currently:  Brewing Potions")
-				or ((not g_Constraint) and C_Indicator.ImageColor3 == Color3.fromRGB(255, 0, 0) and (C_Label.Text == "Currently:  Idle" or C_Label.Text == "ERROR!  No potions to brew!"))) then
-				C_Indicator.ImageColor3 = Color3.fromRGB(255, 0, 0); C_Label.Text = "Currently:  Idle"; g_Constraint = false
+			elseif not ((g_Constraint and C_Color.BackgroundColor3 == Color3.fromRGB(0, 214, 0) and C_Label.Text == "Currently:  Brewing Potions")
+				or ((not g_Constraint) and C_Color.BackgroundColor3 == Color3.fromRGB(214, 0, 0) and (C_Label.Text == "Currently:  Idle" or C_Label.Text == "No potions to brew!"))) then
+				C_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0); C_Label.Text = "Currently:  Idle"; g_Constraint = false
 			end
 		end)
 	end
+end)
+
+spawn(function()
+	while wait(0.8) do if b_Constraint then game:GetService("ReplicatedStorage").NetworkRemoteEvent:FireServer("BlowBubble") end end
 end)
 
 spawn(function()
