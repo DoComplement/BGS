@@ -1,4 +1,3 @@
--- Instances:
 
 local chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
@@ -6,7 +5,9 @@ local chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 
 local name = ""
 for i = 1, math.random(5, 16) do name = name .. chars[math.random(1, #chars)] end
 
-local MainUi_2 = Instance.new("ScreenGui")
+-- Instances:
+
+local MainUi_3 = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local UIGradient = Instance.new("UIGradient")
 local UICorner = Instance.new("UICorner")
@@ -23,35 +24,41 @@ local P_Reset2 = Instance.new("ImageButton")
 local P_Image2 = Instance.new("ImageLabel")
 local P_Label2 = Instance.new("TextLabel")
 local UICorner_5 = Instance.new("UICorner")
-local Event_TP = Instance.new("TextButton")
+local P_Label3 = Instance.new("TextLabel")
 local UICorner_6 = Instance.new("UICorner")
-local Inv_GameUi = Instance.new("TextButton")
+local P_Image3 = Instance.new("ImageLabel")
+local P_Reset3 = Instance.new("ImageButton")
+local Event_TP = Instance.new("TextButton")
 local UICorner_7 = Instance.new("UICorner")
-local Lab_TP = Instance.new("TextButton")
-local Buttons = Instance.new("Frame")
+local Inv_GameUi = Instance.new("TextButton")
 local UICorner_8 = Instance.new("UICorner")
-local Inv_Ui = Instance.new("TextButton")
+local Lab_TP = Instance.new("TextButton")
 local UICorner_9 = Instance.new("UICorner")
+local Inv_Ui = Instance.new("TextButton")
+local UICorner_10 = Instance.new("UICorner")
 local C_Label = Instance.new("TextLabel")
 local Potions_N = Instance.new("Frame")
-local UICorner_10 = Instance.new("UICorner")
-local Pot_Upd = Instance.new("TextButton")
 local UICorner_11 = Instance.new("UICorner")
-local UIListLayout = Instance.new("UIListLayout")
 local Potions_C = Instance.new("ImageButton")
 local P_List = Instance.new("Frame")
 local UIGradient_3 = Instance.new("UIGradient")
 local P_Label = Instance.new("TextLabel")
-local B_Indicator = Instance.new("ImageButton")
-local B_Color = Instance.new("TextLabel")
-local UICorner_12 = Instance.new("UICorner")
 local C_Indicator = Instance.new("ImageButton")
 local C_Color = Instance.new("TextLabel")
 local UICorner_13 = Instance.new("UICorner")
+local B_Indicator = Instance.new("ImageButton")
+local B_Color = Instance.new("TextLabel")
+local UICorner_14 = Instance.new("UICorner")
+local UIPadding = Instance.new("UIPadding")
 local Main_C = Instance.new("ImageButton")
 local Warning_Icon = Instance.new("ImageButton")
 local Warning_Label = Instance.new("TextLabel")
 local Title = Instance.new("TextLabel")
+local Buttons = Instance.new("Frame")
+local Pot_Upd = Instance.new("TextButton")
+local UICorner_12 = Instance.new("UICorner")
+local UIListLayout = Instance.new("UIListLayout")
+
 
 local LP = game:GetService("Players").LocalPlayer
 local BFrame = LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
@@ -59,16 +66,16 @@ local g_Constraint = false
 local g_UIVis = true
 local b_Constraint = false
 local images = {}
-local P_list = {"Empty Potion Slot", "Empty Potion Slot"}
+local P_list = {"Empty Potion Slot", "Empty Potion Slot", "Empty Potion Slot"}
 local g_P = {}
 --Properties:
 
-MainUi_2.Name = name
-MainUi_2.Parent = game:GetService("CoreGui")
-MainUi_2.ZIndexBehavior = Enum.ZIndexBehavior.Global
+MainUi_3.Name = name
+MainUi_3.Parent = game:GetService("CoreGui")
+MainUi_3.ZIndexBehavior = Enum.ZIndexBehavior.Global
 
 MainFrame.Name = "MainFrame"
-MainFrame.Parent = MainUi_2
+MainFrame.Parent = MainUi_3
 MainFrame.Active = true
 MainFrame.Draggable = true
 MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -103,7 +110,7 @@ Body.Parent = MainFrame
 Body.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Body.BorderSizePixel = 0
 Body.Position = UDim2.new(0, 0, 0.899999976, 0)
-Body.Size = UDim2.new(0, 255, 0, 147)
+Body.Size = UDim2.new(0, 255, 0, 189)
 
 UICorner_2.CornerRadius = UDim.new(0, 2)
 UICorner_2.Parent = Body
@@ -116,8 +123,8 @@ Potions_B.Parent = Body
 Potions_B.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Potions_B.BackgroundTransparency = 0.500
 Potions_B.BorderSizePixel = 0
-Potions_B.Position = UDim2.new(0.0331155211, 0, 0.189445958, 0)
-Potions_B.Size = UDim2.new(0, 188, 0, 89)
+Potions_B.Position = UDim2.new(0.0370370895, 0, 0.162235066, 0)
+Potions_B.Size = UDim2.new(0, 188, 0, 126)
 
 P_Image1.Name = "P_Image1"
 P_Image1.Parent = Potions_B
@@ -153,9 +160,14 @@ P_Bool2.Parent = Potions_B
 P_Bool2.Name = "P_Bool2"
 P_Bool2.Value = false
 
+P_Bool3 = Instance.new("BoolValue")
+P_Bool3.Parent = Potions_B
+P_Bool3.Name = "P_Bool3"
+P_Bool3.Value = false
+
 P_Reset1.Name = "P_Reset1"
 P_Reset1.Parent = Potions_B
-P_Reset1.BackgroundTransparency = 1
+P_Reset1.BackgroundTransparency = 1.000
 P_Reset1.Position = UDim2.new(0.860000014, 0, 0.100000001, 0)
 P_Reset1.Size = UDim2.new(0, 25, 0, 25)
 P_Reset1.ZIndex = 2
@@ -165,18 +177,20 @@ P_Reset1.ImageRectSize = Vector2.new(50, 50)
 P_Reset1.ImageTransparency = 0.5
 P_Reset1.MouseButton1Down:Connect(function()
 	if P_Reset1.ImageTransparency ~= 0.5 then
-		P_Label1.Text = P_Label2.Text
-		P_Image1.Image = P_Image2.Image
-		P_Image1.ImageTransparency = P_Image2.ImageTransparency
-		P_Reset1.ImageTransparency = P_Reset2.ImageTransparency
-		P_Bool1.Value = P_Bool2.Value
-		P_list[1] = P_Label1.Text
-		if P_Label2.Text ~= "Empty Potion Slot" then
-			P_Label2.Text = "Empty Potion Slot"
-			P_Image2.ImageTransparency = 1
-			P_Reset2.ImageTransparency = 0.5
-			P_Bool2.Value = false
-			P_list[2] = P_Label2.Text
+		for i = 1, 2 do
+			Potions_B["P_Label"..i].Text = Potions_B["P_Label"..(i + 1)].Text
+			Potions_B["P_Reset"..i].ImageTransparency = Potions_B["P_Reset"..(i + 1)].ImageTransparency
+			Potions_B["P_Image"..i].Image = Potions_B["P_Image"..(i + 1)].Image
+			Potions_B["P_Image"..i].ImageTransparency = Potions_B["P_Image"..(i + 1)].ImageTransparency
+			Potions_B["P_Bool"..i].Value = Potions_B["P_Bool"..(i + 1)].Value
+			P_list[i] = Potions_B["P_Label"..i].Text
+		end
+		if P_Label3.Text ~= "Empty Potion Slot" then
+			P_Label3.Text = "Empty Potion Slot"
+			P_Reset3.ImageTransparency = 0.5
+			P_Image3.ImageTransparency = 1
+			P_Bool3.Value = false
+			P_list[3] = P_Label3.Text
 		end
 		if g_Constraint and P_Label1.Text == "Empty Potion Slot" then
 			g_Constraint = false
@@ -188,8 +202,8 @@ end)
 
 P_Reset2.Name = "P_Reset2"
 P_Reset2.Parent = Potions_B
-P_Reset2.BackgroundTransparency = 1
-P_Reset2.Position = UDim2.new(0.860000014, 0, 0.59370786, 0)
+P_Reset2.BackgroundTransparency = 1.000
+P_Reset2.Position = UDim2.new(0.860000014, 0, 0.3936508, 0)
 P_Reset2.Size = UDim2.new(0, 25, 0, 25)
 P_Reset2.ZIndex = 2
 P_Reset2.Image = "rbxassetid://6764432408"
@@ -198,11 +212,19 @@ P_Reset2.ImageRectSize = Vector2.new(50, 50)
 P_Reset2.ImageTransparency = 0.5
 P_Reset2.MouseButton1Down:Connect(function()
 	if P_Reset2.ImageTransparency ~= 0.5 then
-		P_Label2.Text = "Empty Potion Slot"
-		P_Reset2.ImageTransparency = 0.5
-		P_Image2.ImageTransparency = 1
-		P_Bool2.Value = false
+		P_Label2.Text = P_Label3.Text
+		P_Image2.Image = P_Image3.Image
+		P_Image2.ImageTransparency = P_Image3.ImageTransparency
+		P_Reset2.ImageTransparency = P_Reset3.ImageTransparency
+		P_Bool2.Value = P_Bool3.Value
 		P_list[2] = P_Label2.Text
+		if P_Label3.Text ~= "Empty Potion Slot" then
+			P_Label3.Text = "Empty Potion Slot"
+			P_Image3.ImageTransparency = 1
+			P_Reset3.ImageTransparency = 0.5
+			P_Bool3.Value = false
+			P_list[3] = P_Label3.Text
+		end
 	end
 end)
 
@@ -211,7 +233,7 @@ P_Image2.Parent = Potions_B
 P_Image2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 P_Image2.BackgroundTransparency = 1.000
 P_Image2.BorderSizePixel = 0
-P_Image2.Position = UDim2.new(0.00680850726, 0, 0.551114142, 0)
+P_Image2.Position = UDim2.new(0.00680850819, 0, 0.364650816, 0)
 P_Image2.Size = UDim2.new(0, 34, 0, 34)
 P_Image2.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
 P_Image2.ImageTransparency = 1.000
@@ -219,7 +241,7 @@ P_Image2.ImageTransparency = 1.000
 P_Label2.Name = "P_Label2"
 P_Label2.Parent = Potions_B
 P_Label2.BackgroundColor3 = Color3.fromRGB(236, 87, 77)
-P_Label2.Position = UDim2.new(0.200000003, 0, 0.574999988, 0)
+P_Label2.Position = UDim2.new(0.200000003, 0, 0.38365081, 0)
 P_Label2.Size = UDim2.new(0, 123, 0, 29)
 P_Label2.Font = Enum.Font.SourceSans
 P_Label2.Text = "Empty Potion Slot"
@@ -228,13 +250,55 @@ P_Label2.TextSize = 14.000
 
 UICorner_5.Parent = P_Label2
 
+P_Label3.Name = "P_Label3"
+P_Label3.Parent = Potions_B
+P_Label3.BackgroundColor3 = Color3.fromRGB(236, 87, 77)
+P_Label3.Position = UDim2.new(0.200000003, 0, 0.677999973, 0)
+P_Label3.Size = UDim2.new(0, 123, 0, 29)
+P_Label3.Font = Enum.Font.SourceSans
+P_Label3.Text = "Empty Potion Slot"
+P_Label3.TextColor3 = Color3.fromRGB(0, 0, 0)
+P_Label3.TextSize = 14.000
+
+UICorner_6.Parent = P_Label3
+
+P_Image3.Name = "P_Image3"
+P_Image3.Parent = Potions_B
+P_Image3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+P_Image3.BackgroundTransparency = 1.000
+P_Image3.BorderSizePixel = 0
+P_Image3.Position = UDim2.new(0.00700000022, 0, 0.658999979, 0)
+P_Image3.Size = UDim2.new(0, 34, 0, 34)
+P_Image3.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+P_Image3.ImageTransparency = 1.000
+
+P_Reset3.Name = "P_Reset3"
+P_Reset3.Parent = Potions_B
+P_Reset3.BackgroundTransparency = 1.000
+P_Reset3.Position = UDim2.new(0.860000014, 0, 0.688000023, 0)
+P_Reset3.Size = UDim2.new(0, 25, 0, 25)
+P_Reset3.ZIndex = 2
+P_Reset3.Image = "rbxassetid://6764432408"
+P_Reset3.ImageRectOffset = Vector2.new(200, 600)
+P_Reset3.ImageRectSize = Vector2.new(50, 50)
+P_Reset3.ImageTransparency = 0.5
+P_Reset3.MouseButton1Down:Connect(function()
+	if P_Reset3.ImageTransparency ~= 0.5 then
+		P_Label3.Text = "Empty Potion Slot"
+		P_Reset3.ImageTransparency = 0.5
+		P_Image3.ImageTransparency = 1
+		P_Bool3.Value = false
+		P_list[3] = P_Label3.Text
+	end
+end)
+
 Buttons.Name = "Buttons"
 Buttons.Parent = Body
 Buttons.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Buttons.BackgroundTransparency = 1.000
 Buttons.BorderSizePixel = 0
-Buttons.Position = UDim2.new(0.805999994, 0, 0.0399999991, 0)
-Buttons.Size = UDim2.new(0, 46, 0, 140)
+Buttons.Position = UDim2.new(0.810000002, 0, 0.112999998, 0)
+Buttons.Size = UDim2.new(0, 46, 0, 155)
 
 Event_TP.Name = "Event_TP"
 Event_TP.Parent = Buttons
@@ -252,8 +316,20 @@ Event_TP.MouseButton1Down:Connect(function()
 	game:GetService("ReplicatedStorage").NetworkRemoteEvent:FireServer("Teleport", "EventSpawn")
 end)
 
-UICorner_6.CornerRadius = UDim.new(0, 4)
-UICorner_6.Parent = Event_TP
+UICorner_7.CornerRadius = UDim.new(0, 4)
+UICorner_7.Parent = Event_TP
+
+Inv_GameUi.Name = "Inv_GameUi"
+Inv_GameUi.Parent = Buttons
+Inv_GameUi.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Inv_GameUi.BackgroundTransparency = 0.660
+Inv_GameUi.BorderSizePixel = 0
+Inv_GameUi.Position = UDim2.new(0.805999994, 0, 0.430000007, 0)
+Inv_GameUi.Size = UDim2.new(0, 40, 0, 24)
+Inv_GameUi.Font = Enum.Font.SourceSans
+Inv_GameUi.Text = "Inv."
+Inv_GameUi.TextColor3 = Color3.fromRGB(255, 255, 255)
+Inv_GameUi.TextSize = 14.000
 
 Inv_GameUi.Name = "Inv_GameUi"
 Inv_GameUi.Parent = Buttons
@@ -279,8 +355,8 @@ Inv_GameUi.MouseButton1Down:Connect(function()
 	d.Settings.Visible = g_UIVis
 end)
 
-UICorner_7.CornerRadius = UDim.new(0, 4)
-UICorner_7.Parent = Inv_GameUi
+UICorner_8.CornerRadius = UDim.new(0, 4)
+UICorner_8.Parent = Inv_GameUi
 
 Lab_TP.Name = "Lab_TP"
 Lab_TP.Parent = Buttons
@@ -298,8 +374,8 @@ Lab_TP.MouseButton1Down:Connect(function()
 	game:GetService("ReplicatedStorage").NetworkRemoteEvent:FireServer("Teleport", "LabSpawn")
 end)
 
-UICorner_8.CornerRadius = UDim.new(0, 4)
-UICorner_8.Parent = Lab_TP
+UICorner_9.CornerRadius = UDim.new(0, 4)
+UICorner_9.Parent = Lab_TP
 
 Inv_Ui.Name = "Inv_Ui"
 Inv_Ui.Parent = Buttons
@@ -314,10 +390,10 @@ Inv_Ui.TextColor3 = Color3.fromRGB(255, 255, 255)
 Inv_Ui.TextSize = 14.000
 Inv_Ui.MouseButton1Down:Connect(function()
 	if BFrame then BFrame.Visible = not BFrame.visible end
-end)    
+end)   
 
-UICorner_9.CornerRadius = UDim.new(0, 4)
-UICorner_9.Parent = Inv_Ui
+UICorner_10.CornerRadius = UDim.new(0, 4)
+UICorner_10.Parent = Inv_Ui
 
 Pot_Upd.Name = "Pot_Upd"
 Pot_Upd.Parent = Buttons
@@ -331,53 +407,18 @@ Pot_Upd.Text = "Upd."
 Pot_Upd.TextColor3 = Color3.fromRGB(255, 255, 255)
 Pot_Upd.TextSize = 14.000
 
-UICorner_10.CornerRadius = UDim.new(0, 4)
-UICorner_10.Parent = Pot_Upd
+UICorner_12.CornerRadius = UDim.new(0, 4)
+UICorner_12.Parent = Pot_Upd
 
 UIListLayout.Parent = Buttons
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0.0299999993, 0)
-
-C_Label.Name = "C_Label"
-C_Label.Parent = Body
-C_Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-C_Label.BackgroundTransparency = 1.000
-C_Label.Position = UDim2.new(0.149019614, 0, 0.0211640205, 0)
-C_Label.Size = UDim2.new(0, 76, 0, 21)
-C_Label.Font = Enum.Font.SourceSans
-C_Label.Text = "Currently:  Idle"
-C_Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-C_Label.TextSize = 14.000
-C_Label.TextXAlignment = Enum.TextXAlignment.Left
-
-B_Indicator.Name = "B_Indicator"
-B_Indicator.Parent = Body
-B_Indicator.BackgroundTransparency = 1.000
-B_Indicator.Position = UDim2.new(0.670588255, 0, 0.0136054419, 0)
-B_Indicator.Size = UDim2.new(0, 23, 0, 23)
-B_Indicator.ZIndex = 2
-B_Indicator.Image = "rbxassetid://3926309567"
-B_Indicator.ImageRectOffset = Vector2.new(628, 420)
-B_Indicator.ImageRectSize = Vector2.new(48, 48)
-
-B_Color.Name = "B_Color"
-B_Color.Parent = B_Indicator
-B_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0)
-B_Color.Position = UDim2.new(0.270000011, 0, 0.270000011, 0)
-B_Color.Size = UDim2.new(0, 11, 0, 11)
-B_Color.Font = Enum.Font.SourceSans
-B_Color.Text = ""
-B_Color.TextColor3 = Color3.fromRGB(0, 0, 0)
-B_Color.TextSize = 14.000
-
-UICorner_12.CornerRadius = UDim.new(0, 100)
-UICorner_12.Parent = B_Color
+UIListLayout.Padding = UDim.new(0.0399999991, 0)
 
 C_Indicator.Name = "C_Indicator"
 C_Indicator.Parent = Body
 C_Indicator.BackgroundTransparency = 1.000
-C_Indicator.Position = UDim2.new(0.0392156877, 0, 0.0136054419, 0)
-C_Indicator.Size = UDim2.new(0, 23, 0, 23)
+C_Indicator.Position = UDim2.new(0.0390000008, 0, 0.0149999997, 0)
+C_Indicator.Size = UDim2.new(0, 25, 0, 25)
 C_Indicator.ZIndex = 2
 C_Indicator.Image = "rbxassetid://3926309567"
 C_Indicator.ImageRectOffset = Vector2.new(628, 420)
@@ -394,11 +435,13 @@ C_Indicator.MouseButton1Down:Connect(function()
 	end
 end)
 
+UIPadding.Parent = C_Indicator
+
 C_Color.Name = "C_Color"
 C_Color.Parent = C_Indicator
 C_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0)
-C_Color.Position = UDim2.new(0.270000011, 0, 0.270000011, 0)
-C_Color.Size = UDim2.new(0, 11, 0, 11)
+C_Color.Position = UDim2.new(0.22, 0, 0.20, 0)
+C_Color.Size = UDim2.new(0, 15, 0, 15)
 C_Color.Font = Enum.Font.SourceSans
 C_Color.Text = ""
 C_Color.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -407,11 +450,51 @@ C_Color.TextSize = 14.000
 UICorner_13.CornerRadius = UDim.new(0, 100)
 UICorner_13.Parent = C_Color
 
+B_Indicator.Name = "B_Indicator"
+B_Indicator.Parent = Body
+B_Indicator.BackgroundTransparency = 1.000
+B_Indicator.Position = UDim2.new(0.670372546, 0, 0.0149999997, 0)
+B_Indicator.Size = UDim2.new(0, 25, 0, 25)
+B_Indicator.ZIndex = 2
+B_Indicator.Image = "rbxassetid://3926309567"
+B_Indicator.ImageRectOffset = Vector2.new(628, 420)
+B_Indicator.ImageRectSize = Vector2.new(48, 48)
+B_Indicator.MouseButton1Down:Connect(function()
+	if b_Constraint then B_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0)
+	else B_Color.BackgroundColor3 = Color3.fromRGB(0, 214, 0) end
+	b_Constraint = not b_Constraint
+end)
+
+B_Color.Name = "B_Color"
+B_Color.Parent = B_Indicator
+B_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0)
+B_Color.Position = UDim2.new(0.22, 0, 0.20, 0)
+B_Color.Size = UDim2.new(0, 15, 0, 15)
+B_Color.Font = Enum.Font.SourceSans
+B_Color.Text = ""
+B_Color.TextColor3 = Color3.fromRGB(0, 0, 0)
+B_Color.TextSize = 14.000
+
+UICorner_14.CornerRadius = UDim.new(0, 100)
+UICorner_14.Parent = B_Color
+
+C_Label.Name = "C_Label"
+C_Label.Parent = Body
+C_Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+C_Label.BackgroundTransparency = 1.000
+C_Label.Position = UDim2.new(0.149019614, 0, 0.0211640205, 0)
+C_Label.Size = UDim2.new(0, 76, 0, 21)
+C_Label.Font = Enum.Font.SourceSans
+C_Label.Text = "Currently:  Idle"
+C_Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+C_Label.TextSize = 14.000
+C_Label.TextXAlignment = Enum.TextXAlignment.Left
+
 Potions_N.Name = "Potions_N"
 Potions_N.Parent = Body
 Potions_N.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Potions_N.BackgroundTransparency = 0.600
-Potions_N.Position = UDim2.new(0.0352941193, 0, 0.83522296, 0)
+Potions_N.Position = UDim2.new(0.0352941193, 0, 0.862433851, 0)
 Potions_N.Size = UDim2.new(0, 188, 0, 19)
 
 UICorner_11.CornerRadius = UDim.new(0, 3)
@@ -420,7 +503,7 @@ UICorner_11.Parent = Potions_N
 Potions_C.Name = "Potions_C"
 Potions_C.Parent = Potions_N
 Potions_C.BackgroundTransparency = 1.000
-Potions_C.Position = UDim2.new(0.879999995, 0, -0.270000011, 0)
+Potions_C.Position = UDim2.new(0.879999995, 0, -0.25, 0)
 Potions_C.Rotation = 90.000
 Potions_C.Selectable = false
 Potions_C.Size = UDim2.new(0, 25, 0, 28)
@@ -461,7 +544,7 @@ P_Label.Name = "P_Label"
 P_Label.Parent = Body
 P_Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 P_Label.BackgroundTransparency = 1.000
-P_Label.Position = UDim2.new(0.172549039, 0, 0.848828495, 0)
+P_Label.Position = UDim2.new(0.175999999, 0, 0.870000005, 0)
 P_Label.Size = UDim2.new(0, 63, 0, 15)
 P_Label.Font = Enum.Font.SourceSans
 P_Label.Text = "Choose Potion(s)"
@@ -477,7 +560,6 @@ Main_C.Position = UDim2.new(0.889999986, 0, -0.075000003, 0)
 Main_C.Selectable = false
 Main_C.Size = UDim2.new(0, 25, 0, 28)
 Main_C.ZIndex = 2
-Main_C.Rotation = 0
 Main_C.Image = "rbxassetid://3926305904"
 Main_C.ImageColor3 = Color3.fromRGB(0, 0, 0)
 Main_C.ImageRectOffset = Vector2.new(564, 284)
@@ -498,7 +580,7 @@ Main_C.MouseButton1Down:Connect(function()
 		Main_Moving = false
 	elseif not Main_Moving then
 		Main_Moving = true
-		Body:TweenSize(UDim2.new(0, 255, 0, 147), "Out", "Sine", 0.5, true)
+		Body:TweenSize(UDim2.new(0, 255, 0, 189), "Out", "Sine", 0.5, true)
 		repeat Main_C.Rotation = Main_C.Rotation - 10 wait(0.01) until Main_C.Rotation == 0 
 		Body.ClipsDescendants = false
 		Potions_C.Visible = true
@@ -558,7 +640,7 @@ end)
 spawn(function()
 	while wait(1) do
 		pcall(function()
-			for i = 1, 2 do
+			for i = 1, 3 do
 				if Potions_B["P_Label"..i].Text ~= P_list[i] then Potions_B["P_Label"..i].Text = P_list[i] end
 			end
 			for i = 1, #g_P do
@@ -614,9 +696,9 @@ pcall(function()
 		local v = P_List:FindFirstChild("Recipe"..i)
 
 		v.MouseButton1Down:Connect(function()
-			for x = 1, 2 do
+			for x = 1, 3 do
 				if Potions_B["P_Label"..x].Text == "Empty Potion Slot" then
-					Potions_B["P_Label"..x].Text = v.Text; 
+					Potions_B["P_Label"..x].Text = v.Text
 					Potions_B["P_Reset"..x].ImageTransparency = 0
 					Potions_B["P_Image"..x].Image = images[i]
 					Potions_B["P_Image"..x].ImageTransparency = 0
