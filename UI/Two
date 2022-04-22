@@ -394,7 +394,7 @@ C_Indicator.MouseButton1Down:Connect(function()
 		if not g_Constraint then C_Label.Text = "Currently:  Idle" end
 	else
 		if g_Constraint then C_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0); C_Label.Text = "Currently:  Idle"
-		else C_Color.BackgroundColor3 = Color3.fromRGB(0, 214, 0); C_Label.Text = "Currently:  Brewing Potions" end
+		else C_Color.BackgroundColor3 = Color3.fromRGB(0, 214, 0); C_Label.Text = "Currently:  Brewing" end
 		g_Constraint = not g_Constraint
 	end
 end)
@@ -548,7 +548,7 @@ spawn(function()
 				repeat Warning_Icon.Visible = not Warning_Icon.Visible; wait(1) until LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
 				Warning_Label.Visible = false
 				Warning_Icon.Visible = false
-			elseif not ((g_Constraint and C_Color.BackgroundColor3 == Color3.fromRGB(0, 214, 0) and C_Label.Text == "Currently:  Brewing Potions")
+			elseif not ((g_Constraint and C_Color.BackgroundColor3 == Color3.fromRGB(0, 214, 0) and C_Label.Text == "Currently:  Brewing")
 				or ((not g_Constraint) and C_Color.BackgroundColor3 == Color3.fromRGB(214, 0, 0) and (C_Label.Text == "Currently:  Idle" or C_Label.Text == "No potions to brew!"))) then
 				C_Color.BackgroundColor3 = Color3.fromRGB(214, 0, 0); C_Label.Text = "Currently:  Idle"; g_Constraint = false
 			end
