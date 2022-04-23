@@ -259,8 +259,8 @@ if HEADER then
         		end) 
         	elseif index == 8 then
         		obj.MouseButton1Down:Connect(function()
-        			local t_bool = LP.PlayerGui.ScreenGui.StatsFrame.Coins.More.Visible ; sum = 0
-        			for i = 1, #p_Q do p_Q[i] = 0 end
+        			local t_bool = LP.PlayerGui.ScreenGui.StatsFrame.Coins.More.Visible
+        			for i = 1, #p_Q do p_Q[i] = 0 end; sum = 0
         			getp1_F(); getp2_F(t_bool);
         			LP.PlayerGui.ScreenGui.PetsFrame.Parent = nil;
         		end)
