@@ -48,7 +48,7 @@ if HEADER then
     local Potions_C = Instance.new("ImageButton")
     local P_List = Instance.new("Frame")
     local UIGradient_3 = Instance.new("UIGradient")
-    local P_Label = Instance.new("TextLabel")
+    local P_Title = Instance.new("TextLabel")
     local C_Indicator = Instance.new("ImageButton")
     local C_Color = Instance.new("TextLabel")
     local UICorner_13 = Instance.new("UICorner")
@@ -76,16 +76,16 @@ if HEADER then
     local b_Constraint = false
     local Main_Moving = false
     local C_Moving = false
-    local images = {}
-    local P_list = {"Empty Potion Slot", "Empty Potion Slot", "Empty Potion Slot"}
-    local g_P = {}
-    local n_T = {}
-    local i_T = {}
-    local p_T = {}
-    local f_S = {}
-    local p_Q = {}
+    local p_L = {"Empty Potion Slot", "Empty Potion Slot", "Empty Potion Slot"}
+    local i_L = {{"rbxasset://textures/ui/GuiImagePlaceholder.png", 1}, {"rbxasset://textures/ui/GuiImagePlaceholder.png", 1}, {"rbxasset://textures/ui/GuiImagePlaceholder.png", 1}}
+    local t_L = {0.5, 0.5, 0.5}; local g_P = {}; local n_T = {}; local i_T = {}; local p_T = {}; local f_S = {};  local p_Q = {}; local images = {}
     local sum = 0
     --Properties:
+    
+    -- t_L = holds the transparency of the reset buttons 
+    -- p_L = potion slot text, images = potion image array, i_L = holds the slots images,
+    -- g_P = table of Potion Names, n_T = table of Instance names, i_T = table of Instances, p_T = table of instance parents
+    -- f_S = table of button functions, p_Q = array of user's potion count
     
     local function closeFrames(b)
     	local s = {"Codes", "Index", "Boosts", "Prizes"};
@@ -197,14 +197,19 @@ if HEADER then
         					i_T[9]["P_Image"..i].Image = i_T[9]["P_Image"..(i + 1)].Image
         					i_T[9]["P_Image"..i].ImageTransparency = i_T[9]["P_Image"..(i + 1)].ImageTransparency
         					i_T[9]["P_Bool"..i].Value = i_T[9]["P_Bool"..(i + 1)].Value
-        					P_list[i] = i_T[9]["P_Label"..i].Text
+        					p_L[i] = i_T[9]["P_Label"..i].Text
+        					t_L[i] = i_T[9]["P_Reset"..i].ImageTransparency
+        					i_L[i][0] = i_T[9]["P_Image"..i].Image
+        					i_L[i][1] = i_T[9]["P_Image"..i].ImageTransparency
         				end
         				if i_T[22].Text ~= "Empty Potion Slot" then
         					i_T[22].Text = "Empty Potion Slot"
         					i_T[25].ImageTransparency = 0.5
         					i_T[24].ImageTransparency = 1
         					i_T[16].Value = false
-        					P_list[3] = i_T[22].Text
+        					p_L[3] = i_T[22].Text
+        					t_L[3] = 0.5
+        					i_L[3][1] = 1
         				end
         				if g_Constraint and i_T[12].Text == "Empty Potion Slot" then
         					g_Constraint = false
@@ -221,13 +226,18 @@ if HEADER then
         				i_T[19].ImageTransparency = i_T[24].ImageTransparency
         				i_T[18].ImageTransparency = i_T[25].ImageTransparency
         				i_T[15].Value = i_T[16].Value
-        				P_list[2] = i_T[20].Text
+        				p_L[2] = i_T[20].Text
+        				t_L[3] = i_T[25].ImageTransparency
+        				i_L[3][0] = i_T[24].Image
+        				i_L[3][1] = i_T[24].ImageTransparency
         				if i_T[22].Text ~= "Empty Potion Slot" then
         					i_T[22].Text = "Empty Potion Slot"
         					i_T[24].ImageTransparency = 1
         					i_T[25].ImageTransparency = 0.5
         					i_T[16].Value = false
-        					P_list[3] = i_T[22].Text
+        					p_L[3] = i_T[22].Text
+        					t_L[3] = 0.5
+        					i_L[3][1] = 1
         				end
         			end
         		end)
@@ -238,19 +248,18 @@ if HEADER then
         				i_T[25].ImageTransparency = 0.5
         				i_T[24].ImageTransparency = 1
         				i_T[16].Value = false
-        				P_list[3] = i_T[22].Text
+        				p_L[3] = i_T[22].Text
+        				t_L[3] = 0.5; i_L[3][1] = 1
         			end
         		end)
         	elseif index == 4 then
         		obj.MouseButton1Down:Connect(function()
-        			-- write condition to check if user is already at event aready, (then don't teleport)
         			game:GetService("ReplicatedStorage").NetworkRemoteEvent:FireServer("Teleport", "EventSpawn")
         		end)
         	elseif index == 5 then
         		obj.MouseButton1Down:Connect(function() g_UIVis = not g_UIVis; closeFrames(g_UIVis) end)
         	elseif index == 6 then
         		obj.MouseButton1Down:Connect(function()
-        			-- check if the user is already there
         			game:GetService("ReplicatedStorage").NetworkRemoteEvent:FireServer("Teleport", "LabSpawn")
         		end)
         	elseif index == 7 then
@@ -328,7 +337,8 @@ if HEADER then
         					i_T[9]["P_Image"..x].Image = images[i]
         					i_T[9]["P_Image"..x].ImageTransparency = 0
         					i_T[9]["P_Bool"..x].Value = true
-        					P_list[x] = obj.Text
+        					p_L[x] = obj.Text; i_L[x][0] = images[i]
+        					i_L[x][1] = 0; t_L[x] = 0
         					break
         				end 
         			end
@@ -727,18 +737,18 @@ if HEADER then
     UIGradient_3.Parent = Potions_N
     UIGradient_3.Name = "UIGradient_3"
     
-    P_Label.Name = "P_Label"
-    P_Label.Parent = Body
-    P_Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    P_Label.BackgroundTransparency = 1.000
-    P_Label.Position = UDim2.new(0.175999999, 0, 0.870000005, 0)
-    P_Label.Size = UDim2.new(0, 63, 0, 15)
-    P_Label.Font = Enum.Font.SourceSans
-    P_Label.Text = "Choose Potion(s)"
-    P_Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    P_Label.TextSize = 14.000
-    P_Label.TextStrokeTransparency = 0.750
-    P_Label.TextXAlignment = Enum.TextXAlignment.Left
+    P_Title.Name = "P_Title"
+    P_Title.Parent = Body
+    P_Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    P_Title.BackgroundTransparency = 1.000
+    P_Title.Position = UDim2.new(0.175999999, 0, 0.870000005, 0)
+    P_Title.Size = UDim2.new(0, 63, 0, 15)
+    P_Title.Font = Enum.Font.SourceSans
+    P_Title.Text = "Choose Potion(s)"
+    P_Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    P_Title.TextSize = 14.000
+    P_Title.TextStrokeTransparency = 0.750
+    P_Title.TextXAlignment = Enum.TextXAlignment.Left
     
     Main_C.Name = "Main_C"
     Main_C.Parent = MainFrame
@@ -789,9 +799,9 @@ if HEADER then
     			if not LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame") then
     				i_T[79].Visible = true
     				repeat i_T[80].Visible = not i_T[80].Visible; wait(1) until LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
-    				i_T[79].Visible = false
-    				i_T[80].Visible = false
-    			elseif not ((g_Constraint and i_T[39].BackgroundColor3 == Color3.fromRGB(0, 214, 0) and i_T[44].Text == "Currently:  Brewing")
+    				i_T[79].Visible = false; i_T[80].Visible = false
+    			end
+    			if not ((g_Constraint and i_T[39].BackgroundColor3 == Color3.fromRGB(0, 214, 0) and i_T[44].Text == "Currently:  Brewing")
     				or ((not g_Constraint) and i_T[39].BackgroundColor3 == Color3.fromRGB(214, 0, 0) and (i_T[44].Text == "Currently:  Idle" or i_T[44].Text == "No potions to brew!"))) then
     				i_T[39].BackgroundColor3 = Color3.fromRGB(214, 0, 0); i_T[44].Text = "Currently:  Idle"; g_Constraint = false
     			end
@@ -806,12 +816,11 @@ if HEADER then
     spawn(function()
     	while wait(1) do
     		pcall(function()
-    			for i = 1, 3 do
-    				if i_T[9]["P_Label"..i].Text ~= P_list[i] then i_T[9]["P_Label"..i].Text = P_list[i] end
-    			end
-    			for i = 1, #g_P do
-    				if i_T[48]["Recipe"..i].Text ~= g_P[i] then i_T[48]["Recipe"..i].Text = g_P[i] end
-    			end
+    			for i = 1, 3 do if i_T[9]["P_Label"..i].Text ~= p_L[i] then i_T[9]["P_Label"..i].Text = p_L[i] end end
+    			for i = 1, #g_P do if i_T[48]["Recipe"..i].Text ~= g_P[i] then i_T[48]["Recipe"..i].Text = g_P[i] end end
+    			for i = 1, 3 do if i_T[9]["P_Image"..i].Image ~= i_L[i][0] then i_T[9]["P_Image"..i].Image = i_L[i][0] end end
+    			for i = 1, 3 do if i_T[9]["P_Image"..i].ImageTransparency ~= i_L[i][1] then i_T[9]["P_Image"..i].ImageTransparency = i_L[i][1] end end
+    			for i = 1, 3 do if i_T[9]["P_Reset"..i].ImageTransparency ~= t_L[i] then i_T[9]["P_Reset"..i].ImageTransparency = t_L[i] end end
     		end)
     	end
     end)
@@ -855,16 +864,16 @@ if HEADER then
     
     		t_UIC.CornerRadius = UDim.new(0, 8)
     		t_UIC.Parent = Temp
-    		t_UIC.Name = tostring(15 + i)
+    		t_UIC.Name = "UICorner_" .. tostring(15 + i)
     	end
     end)
     
     MainUi_3:Clone().Parent = f1
-    writefile("TEST.txt", "")
+    writefile("Instances Table Indexes.txt", "")
     for i, v in pairs(game:GetService("CoreGui")[name]:GetDescendants()) do
     	i_T[i + 1] = v; n_T[i + 1] = v.Name; p_T[i + 1] = v.Parent
     	for x = 1, #f_S do if v.Name == f_S[x] then cfun(x, v) end end
-    	appendfile("TEST.txt", tostring(i) .. " | " .. tostring(i_T[i]) .. "\n")
+    	appendfile("Instances Table Indexes.txt", tostring(i + 1) .. " | " .. tostring(i_T[i + 1]) .. "\n")
     end
     
     spawn(function()
@@ -875,23 +884,20 @@ if HEADER then
     			        pcall(function() i_T[i]:Destroy() end); 
     					for x, c in pairs(f1:GetDescendants()) do 
     					    if x == i then
-    					        print("Cloning:", c)
     					        c:Clone().Parent = p_T[i]; wait(0.5); i_T[i] = p_T[i]:FindFirstChild(n_T[i])
     					        for z, t in pairs(i_T[i]:GetDescendants()) do 
-    					            print("Expected:", t, "| Repairing:", n_T[x + z])
-    					            print("Fixing parent:", p_T[x + z], "to", t.Parent)
+    					            if t.Name == "C_Label" then t.Text = i_T[44].Text end
     					            i_T[x + z] = t
     					            p_T[x + z] = t.Parent
     					            for y = 1, #f_S do
     					                if n_T[x + z] == f_S[y] then
-    					                    print("Calling cfun(" .. tostring(y) .. ",", tostring(i_T[x + z]) .. ")")
     					                    cfun(y, i_T[x + z])
     					                end
     					            end
     					        end
     					    end
     					end  
-    				else i_T[i].Parent = p_T[i] print("Fixing Parent of", i_T[i], "to be", p_T[i]) end end
+    				else i_T[i].Parent = p_T[i] end end
     			if i_T[i].Name ~= n_T[i] then i_T[i].Name = n_T[i] end
     		end
     	end
@@ -915,19 +921,20 @@ if HEADER then
     
     -- checks if the user is capable of brewing some potion
     local function checkBrew(str)
-    	local s_F = LP.PlayerGui.ScreenGui.StatsFrame
-    	local stats = {s_F["Stars"].Amount.Text, s_F["Crystals"].Amount.Text, s_F["Magma"].Amount.Text}
+    	local s_F = LP.PlayerGui.ScreenGui.StatsFrame; local t_ = {}
+    	local stats = {s_F["Gems"].Amount.Text, s_F["Stars"].Amount.Text, s_F["Crystals"].Amount.Text, s_F["Magma"].Amount.Text}
+    	for i = 1, #stats do t_[i] = string.gsub(stats[i], ",", ""); t_[i] = tonumber(t_[i]) end
     	local index = getPotion(str)
     	local b
     	pcall(function()
-    		if index < 3 then b = LP.leaderstats.Gems.Value >= 10000000 
-    		elseif index == 3 then b = LP.leaderstats.Gems.Value >= 15000000
-    		elseif index == 4 then b = p_Q[1] > 2 and tonumber(stats[1]) >= 20000000; if b then p_Q[1] = p_Q[1] - 3; sum = sum - 3 end
-    		elseif index == 5 then b = p_Q[2] > 2 and tonumber(stats[2]) >= 20000000; if b then p_Q[2] = p_Q[2] - 3; sum = sum - 3 end
-    		elseif index == 6 then b = p_Q[3] > 4 and tonumber(stats[3]) >= 100000000; if b then p_Q[3] = p_Q[3] - 5; sum = sum - 5 end
+    		if index < 3 then b = t_[1] >= 10000000 
+    		elseif index == 3 then b = t_[1] >= 15000000
+    		elseif index == 4 then b = (p_Q[1] > 2 and t_[2] >= 20000000); if b then p_Q[1] = p_Q[1] - 3; sum = sum - 3 end
+    		elseif index == 5 then b = (p_Q[2] > 2 and t_[3] >= 20000000); if b then p_Q[2] = p_Q[2] - 3; sum = sum - 3 end
+    		elseif index == 6 then b = (p_Q[3] > 4 and t_[4] >= 100000000); if b then p_Q[3] = p_Q[3] - 5; sum = sum - 5 end
     		elseif index == 7 then b = (p_Q[6] > 0 and p_Q[4] > 4); if b then p_Q[6] = p_Q[6] - 1; p_Q[4] = p_Q[4] - 5; sum = sum - 6 end
     		elseif index == 8 then b = (p_Q[6] > 0 and p_Q[5] > 4); if b then p_Q[6] = p_Q[6] - 1; p_Q[5] = p_Q[5] - 5; sum = sum - 6 end
-    		else b = (p_Q[6] > 2 and LP.leaderstats.Gems.Value >= 250000000); if b then p_Q[6] = p_Q[6] - 3; sum = sum - 3 end end
+    		else b = (p_Q[6] > 2 and t_[1] >= 250000000); if b then p_Q[6] = p_Q[6] - 3; sum = sum - 3 end end
     	end)
     	return b
     end
@@ -940,8 +947,8 @@ if HEADER then
     
     -- main loop
     spawn(function()
-    	while wait(1) do
-    		pcall(function()
+    	while wait(1) do 
+    		--pcall(function()
     			if (i_T[39].BackgroundColor3 == Color3.fromRGB(0, 214, 0) and b_F) then
     				for i = 3, 1, -1 do
     					if (not checkSkip(i)) then
@@ -968,7 +975,7 @@ if HEADER then
     					end
     				end
     			end
-    		end) 
+    		--end) 
     	end
     end)
     
