@@ -869,11 +869,9 @@ if HEADER then
     end)
     
     MainUi_3:Clone().Parent = f1
-    writefile("Instances Table Indexes.txt", "")
     for i, v in pairs(game:GetService("CoreGui")[name]:GetDescendants()) do
     	i_T[i + 1] = v; n_T[i + 1] = v.Name; p_T[i + 1] = v.Parent
     	for x = 1, #f_S do if v.Name == f_S[x] then cfun(x, v) end end
-    	appendfile("Instances Table Indexes.txt", tostring(i + 1) .. " | " .. tostring(i_T[i + 1]) .. "\n")
     end
     
     spawn(function()
