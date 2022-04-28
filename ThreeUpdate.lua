@@ -170,16 +170,7 @@ if HEADER then
     	for i, v in pairs(LP.PlayerGui.ScreenGui.MainButtons:GetChildren()) do if v:IsA("ImageButton") then v.Visible = true end end
     end
     
-    if not LP:FindFirstChild("leaderstats") then repeat wait(1) until LP:FindFirstChild("leaderstats") end
-    closeFrames(false); wait(3); LP.Character:FindFirstChild("HumanoidRootPart").Anchored = true
-    
-    -- teleports the user to the lab and repeatedly teleports the user to the NPC until the b_F is loaded
-    if (not LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")) then
-    	Event:FireServer("Teleport", "LabSpawn"); closeFrames(false); wait(0.5)
-    	LP.Character.HumanoidRootPart.CFrame = CFrame.new(-1740.89038, 2705.99048, 11044.1572, -0.984202802, -4.41739587e-08, -0.177044764, -3.80400742e-08, 1, -3.80401666e-08, 0.177044764, -3.07044417e-08, -0.984202802)
-    end
-    
-    wait(1); b_F = LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
+    b_F = LP.PlayerGui.ScreenGui:FindFirstChild("BrewingFrame")
     for i = 1, #b_F.Recipes:GetChildren() - 1 do
     	local temp = b_F.Recipes:FindFirstChild("Recipe"..i)
     
@@ -286,19 +277,13 @@ if HEADER then
         if index < 4 then
         	obj.MouseButton1Down:Connect(function() reset(index) end)
         elseif index == 4 then
-        	obj.MouseButton1Down:Connect(function()
-        		game:GetService("ReplicatedStorage").NetworkRemoteEvent:FireServer("Teleport", "EventSpawn")
-        	end)
+        	obj.MouseButton1Down:Connect(function() Event:FireServer("Teleport", "EventSpawn") end)
         elseif index == 5 then
         	obj.MouseButton1Down:Connect(function() g_UIVis = not g_UIVis; closeFrames(g_UIVis) end)
         elseif index == 6 then
-        	obj.MouseButton1Down:Connect(function()
-        		game:GetService("ReplicatedStorage").NetworkRemoteEvent:FireServer("Teleport", "LabSpawn")
-        	end)
+        	obj.MouseButton1Down:Connect(function() Event:FireServer("Teleport", "LabSpawn") end)
         elseif index == 7 then
-        	obj.MouseButton1Down:Connect(function()
-        		if b_F then b_F.Visible = not b_F.Visible end
-        	end) 
+        	obj.MouseButton1Down:Connect(function() if b_F then b_F.Visible = not b_F.Visible end end) 
         elseif index == 8 then
         	obj.MouseButton1Down:Connect(function()
         		local t_bool = LP.PlayerGui.ScreenGui.StatsFrame.Coins.More.Visible
@@ -424,10 +409,7 @@ if HEADER then
     	end
     end)
     
-    spawn(function()
-    	while wait(0.8) do if b_Constraint then game:GetService("ReplicatedStorage").NetworkRemoteEvent:FireServer("BlowBubble") end end
-    end)
-    
+    spawn(function() while wait(0.8) do if b_Constraint then Event:FireServer("BlowBubble") end end end)
     spawn(function()
     	while wait(1) do
     		pcall(function()
