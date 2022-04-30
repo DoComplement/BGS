@@ -450,7 +450,7 @@ if HEADER then
     	end
     end)
     
-    --[[
+    
     spawn(function()
     	while wait(1) do
     		for i = 1, #i_T do
@@ -477,7 +477,7 @@ if HEADER then
     		end
     	end
     end)
-    ]]
+    
     -- checks if the user is capable of brewing some potion
     local function checkBrew(str)
     	local s_F = LP.PlayerGui.ScreenGui.StatsFrame; local t_ = {}
