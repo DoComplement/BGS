@@ -9,7 +9,7 @@ if HEADER then
     local fN = ""; local name = "";
     for i = 1, math.random(5, 16) do name = name .. chars[math.random(1, #chars)]; fN = fN .. chars[math.random(1, #chars)] end
     
-    local function createInstance(class, props)
+    local function createInstance(class, props)nt
     	local inst = Instance.new(class)
     	for i, v in pairs(props) do
     		inst[i] = v
@@ -43,7 +43,7 @@ if HEADER then
     local UICorner_6 = createInstance("UICorner", {Parent = P_Label3, Name = "UICorner_6"})
     local P_Image3 = createInstance("ImageLabel", {Name = "P_Image3", Parent = Potions_B, BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 1.000, BorderSizePixel = 0, Position = UDim2.new(0.00700000022, 0, 0.658999979, 0), Size = UDim2.new(0, 34, 0, 34), Image = "rbxasset://textures/ui/GuiImagePlaceholder.png", ImageTransparency = 1.000})
     local P_Reset3 = createInstance("ImageButton", {Name = "P_Reset3", Parent = Potions_B, BackgroundTransparency = 1, Position = UDim2.new(0.860000014, 0, 0.688000023, 0), Size = UDim2.new(0, 25, 0, 25), ZIndex = 2, Image = "rbxassetid://6764432408", ImageTransparency = 0.5, ImageRectOffset = Vector2.new(200, 600), ImageRectSize = Vector2.new(50, 50)})
-    local C_Label = createInstance("TextLabel", {Name = "C_Label", Parent = Body, BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 1.000, Position = UDim2.new(0.149019614, 0, 0.0211640205, 0), Size = UDim2.new(0, 76, 0, 21), Font = Enum.Font.SourceSans, Text = "Currently: Idle", TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 14.000, TextXAlignment = Enum.TextXAlignment.Left})
+    local C_Label = createInstance("TextLabel", {Name = "C_Label", Parent = Body, BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 1.000, Position = UDim2.new(0.149019614, 0, 0.0211640205, 0), Size = UDim2.new(0, 76, 0, 21), Font = Enum.Font.SourceSans, Text = "Currently:  Idle", TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 14.000, TextXAlignment = Enum.TextXAlignment.Left})
     local Potions_N = createInstance("Frame", {Name = "Potions_N", Parent = Body, BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 0.600, Position = UDim2.new(0.0352941193, 0, 0.862433851, 0), Size = UDim2.new(0, 188, 0, 19)})
     local UICorner_7 = createInstance("UICorner", {CornerRadius = UDim.new(0, 3), Parent = Potions_N, Name = "UICorner_7"})
     local Potions_C = createInstance("ImageButton", {Name = "Potions_C", Parent = Potions_N, BackgroundTransparency = 1.000, Position = UDim2.new(0.879999995, 0, -0.25, 0), Rotation = 90.000, Selectable = false, Size = UDim2.new(0, 25, 0, 28), ZIndex = 2, Image = "rbxassetid://3926305904", ImageRectOffset = Vector2.new(564, 284), ImageRectSize = Vector2.new(36, 36)})
@@ -449,8 +449,7 @@ if HEADER then
     		end)
     	end
     end)
-    
-    
+
     spawn(function()
     	while wait(1) do
     		for i = 1, #i_T do
