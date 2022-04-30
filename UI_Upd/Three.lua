@@ -9,7 +9,7 @@ if HEADER then
     local fN = ""; local name = "";
     for i = 1, math.random(5, 16) do name = name .. chars[math.random(1, #chars)]; fN = fN .. chars[math.random(1, #chars)] end
     
-    local function createInstance(class, props)nt
+    local function createInstance(class, props)
     	local inst = Instance.new(class)
     	for i, v in pairs(props) do
     		inst[i] = v
