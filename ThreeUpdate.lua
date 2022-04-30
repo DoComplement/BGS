@@ -393,7 +393,7 @@ if HEADER then
     n_T[1] = name; i_T[1] = MainUi_3; p_T[1] = game:GetService("CoreGui")
     for i, v in pairs(game:GetService("CoreGui")[name]:GetDescendants()) do
     	i_T[i + 1] = v; n_T[i + 1] = v.Name; p_T[i + 1] = v.Parent
-    	for x = 1, #f_S do if (i + 1) == f_S[x] then print(i + 1, x, v.Name); cfun(x, v) end end
+    	for x = 1, #f_S do if (i + 1) == f_S[x] then cfun(x, v) end end
     end
     
     -- fills p_Q with blank data then removes the close button on the BrewingFrame
