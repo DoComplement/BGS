@@ -1,6 +1,7 @@
-print("ScreenGui Size:", game.Players.LocalPlayer.PlayerGui.ScreenGui.AbsoluteSize)
+local size = game.Players.LocalPlayer.PlayerGui.ScreenGui.AbsoluteSize
+local sx = 1920 - size.X; local sy = 973 - size.Y
 local LP = game:GetService("Players").LocalPlayer
-local o_X1, o_Y1, o_X2, o_Y2
+local o_X1 = 1695 - sx; local o_Y1 = 541 - sy; local o_X2 = 1438 - sx; local o_Y2 = 206 - sy
 local p_F
  
     local function getp1_F()
