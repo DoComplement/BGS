@@ -123,7 +123,7 @@ if HEADER then
     		Duration = 5
     	})
     
-    	repeat wait(); m_B.Pets.Position = UDim2.fromOffset(LP:GetMouse().X - (LP.ScreenGui.AbsoluteSize.X/1920)*1696, LP:GetMouse().Y - (LP.ScreenGui.AbsoluteSize.Y/973)*545) 
+    	repeat wait(); m_B.Pets.Position = UDim2.fromOffset(LP:GetMouse().X - (LP.PlayerGui.ScreenGui.AbsoluteSize.X/1920)*1696, LP:GetMouse().Y - (LP.PlayerGui.ScreenGui.AbsoluteSize.Y/973)*545) 
     	until LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
     
     	m_B.Visible = false
@@ -147,7 +147,7 @@ if HEADER then
     
     	wait(1)
         p_F.Tabs.Potions.Visible = true
-        repeat wait(); p_F.Tabs.Potions.Position = UDim2.fromOffset(0, LP:GetMouse().X - (LP.ScreenGui.AbsoluteSize.X/1920)*1436, 0, LP:GetMouse().Y - (LP.ScreenGui.AbsoluteSize.Y/973)*202)
+        repeat wait(); p_F.Tabs.Potions.Position = UDim2.fromOffset(LP:GetMouse().X - (LP.PlayerGui.ScreenGui.AbsoluteSize.X/1920)*1436, LP:GetMouse().Y - (LP.PlayerGui.ScreenGui.AbsoluteSize.Y/973)*202)
         until p_F.Main.Title.Text == "My Potions"
         p_F.Tabs.Potions.Visible = false
         p_UIL.Parent = p_F.Tabs
