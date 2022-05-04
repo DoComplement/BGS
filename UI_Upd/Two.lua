@@ -112,6 +112,7 @@ if HEADER then
     	if LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame") then LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame").Parent = nil end
     	local m_B = LP.PlayerGui.ScreenGui.MainButtons
     	local m_UIL = m_B.UIListLayout
+        m_B.Pets.Position = UDim2.fromScale(0, 0)
     
     	m_UIL.Parent = LP.PlayerGui; if not m_B.Visible then m_B.Visible = true end
     	for i,v in pairs(m_B:GetChildren()) do if v:IsA("ImageButton") and v.Name ~= "Pets" then v.Visible = false end end
@@ -122,7 +123,7 @@ if HEADER then
     		Duration = 5
     	})
     
-    	repeat wait(); m_B.Pets.Position = UDim2.new(0, LP:GetMouse().X - 1700, 0, LP:GetMouse().Y - 539) 
+    	repeat wait(); m_B.Pets.Position = UDim2.fromOffset(LP:GetMouse().X - (LP.ScreenGui.AbsoluteSize.X/1920)*1696, LP:GetMouse().Y - (LP.ScreenGui.AbsoluteSize.Y/973)*545) 
     	until LP.PlayerGui.ScreenGui:FindFirstChild("PetsFrame")
     
     	m_B.Visible = false
@@ -132,10 +133,11 @@ if HEADER then
     -- function to count the total number of cumulative and unique potions the user contains
     local function getp2_F(vis)
     	local p_UIL = p_F.Tabs.UIListLayout
+        p_F.Tabs.Potions.Position = UDim2.new(0, 0, 0, 0)
     
     	for i, v in pairs(p_F.Tabs:GetChildren()) do if v:IsA("ImageButton") then v.Visible = false end end
     	p_F.Main.Visible = false; p_F.Stats.Visible = false; p_UIL.Parent = LP.PlayerGui
-    	p_F.Main.Pages.Potions.List.Grid.UIGridLayout.CellSize = UDim2.new(0, 10, 0, 10)
+    	p_F.Main.Pages.Potions.List.Grid.UIGridLayout.CellSize = UDim2.fromScale(10, 10)
     
     	game:GetService("StarterGui"):SetCore("SendNotification", {
     		Title = "PetsFrame found...",
@@ -145,7 +147,7 @@ if HEADER then
     
     	wait(1)
         p_F.Tabs.Potions.Visible = true
-        repeat wait(); p_F.Tabs.Potions.Position = UDim2.new(0, LP:GetMouse().X - 1436, 0, LP:GetMouse().Y - 202)
+        repeat wait(); p_F.Tabs.Potions.Position = UDim2.fromOffset(0, LP:GetMouse().X - (LP.ScreenGui.AbsoluteSize.X/1920)*1436, 0, LP:GetMouse().Y - (LP.ScreenGui.AbsoluteSize.Y/973)*202)
         until p_F.Main.Title.Text == "My Potions"
         p_F.Tabs.Potions.Visible = false
         p_UIL.Parent = p_F.Tabs
@@ -162,7 +164,7 @@ if HEADER then
        		if v:FindFirstChild("Detail") then p_Q[getPotion(v.Detail.Inner.PotionName.Text)] = p_Q[getPotion(v.Detail.Inner.PotionName.Text)] + 1; sum = sum + 1 end
        	end
        
-        p_F.Main.Pages.Potions.List.Grid.UIGridLayout.CellSize = UDim2.new(0, 115, 0, 115)
+        p_F.Main.Pages.Potions.List.Grid.UIGridLayout.CellSize = UDim2.fromOffset(115, 115)
     	LP.PlayerGui.ScreenGui.MainButtons.Pets.Position = UDim2.new(0, 0, 0, 0)
     	p_F.Tabs.Potions.Position = UDim2.new(1, 5, 0, 0)
     	p_F.Main.Visible = true; p_F.Stats.Visible = true
