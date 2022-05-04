@@ -154,7 +154,7 @@ if HEADER then
     
     	wait(1)
         p_F.Tabs.Potions.Visible = true
-        repeat wait(); p_F.Tabs.Potions.Position = UDim2.fromOffset(0, LP:GetMouse().X - (LP.PlayerGui.ScreenGui.AbsoluteSize.X/1920)*1436, 0, LP:GetMouse().Y - (LP.PlayerGui.ScreenGui.AbsoluteSize.Y/973)*202)
+        repeat wait(); p_F.Tabs.Potions.Position = UDim2.fromOffset(LP:GetMouse().X - (LP.PlayerGui.ScreenGui.AbsoluteSize.X/1920)*1436, LP:GetMouse().Y - (LP.PlayerGui.ScreenGui.AbsoluteSize.Y/973)*202)
         until p_F.Main.Title.Text == "My Potions"
         p_F.Tabs.Potions.Visible = false
         p_UIL.Parent = p_F.Tabs
